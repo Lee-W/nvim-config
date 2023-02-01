@@ -17,4 +17,26 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
-map("n", "<F3>", ":ToggleTaskList<CR>", { expr = true, silent = true })
+----toggl TaskList
+map("n", "<F3>", "<cmd>ToggleTaskList<cr>")
+
+----toggle spell checking
+map("n", "<F7>", "setlocal spell!<cr>")
+
+----toggle ALE
+map("n", "<F8>", "<cmd>ALEToggle<cr>")
+
+----toogle tagbar
+map("n", "<F10>", "<cmd>TagbarToggle<cr>")
+
+----tcomment
+map("n", "`", "<cmd>TComment<cr>")
+map("v", "`", "<cmd>TComment<cr>gv")
+
+---ale
+map("n", "<C-k>", "<Plug>(ale_previous_wrap)", { silent = true })
+map("n", "<C-j>", "<Plug>(ale_next_wrap)", { silent = true })
+
+----jump between buffers (replace tab)
+-- map("n", "gt", ":bn<cr>")
+-- map("n", "gT", ":bp<cr>")
