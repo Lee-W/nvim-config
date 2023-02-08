@@ -31,7 +31,7 @@ map("n", "<F10>", "<cmd>TagbarToggle<cr>")
 
 ----tcomment
 map("n", "`", "<cmd>TComment<cr>")
-map("v", "`", "<cmd>TComment<cr>gv")
+map("v", "`", ":TComment<cr>gv")
 
 ---ale
 map("n", "<C-k>", "<Plug>(ale_previous_wrap)", { silent = true })

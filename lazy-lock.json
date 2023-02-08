@@ -6,6 +6,7 @@
   "Vim-Jinja2-Syntax": { "branch": "master", "commit": "2c17843b074b06a835f88587e1023ceff7e2c7d1" },
   "ale": { "branch": "master", "commit": "116d713f63c7a81663fa53efa10e34649c9479e3" },
   "alpha-nvim": { "branch": "main", "commit": "21a0f2520ad3a7c32c0822f943368dc063a569fb" },
+  "barbar.nvim": { "branch": "master", "commit": "065c6d792a2a3aaf67a754ccd46800c8d1964812" },
   "black": { "branch": "main", "commit": "c4bd2e31ceeac84d68592986fe70920f3d3d0443" },
   "bufferline.nvim": { "branch": "main", "commit": "c7492a76ce8218e3335f027af44930576b561013" },
   "c.vim": { "branch": "master", "commit": "77e9108f27500b4cd79f24de84170d22f6dd888f" },

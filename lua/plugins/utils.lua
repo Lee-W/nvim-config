@@ -138,9 +138,9 @@ return {
   {
     "AckslD/nvim-neoclip.lua",
   },
-  --   {
-  --   "romgrk/barbar.nvim",
-  -- },
+  {
+    "romgrk/barbar.nvim",
+  },
   {
     "henriquehbr/nvim-startup.lua",
   },
