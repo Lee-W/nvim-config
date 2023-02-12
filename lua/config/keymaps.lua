@@ -36,7 +36,3 @@ map("v", "`", ":TComment<cr>gv")
 ---ale
 map("n", "<C-k>", "<Plug>(ale_previous_wrap)", { silent = true })
 map("n", "<C-j>", "<Plug>(ale_next_wrap)", { silent = true })
-
-----jump between buffers (replace tab)
--- map("n", "gt", ":bn<cr>")
--- map("n", "gT", ":bp<cr>")

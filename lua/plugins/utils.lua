@@ -7,23 +7,9 @@ return {
   },
   {
     "liangfeng/TaskList.vim",
-    -- opts = {
-    --   tlTokenList = {"FIXME", "TODO", "XXX"}
-    -- }
-  },
-  {
-    "junegunn/fzf",
-  },
-  {
-    "junegunn/fzf.vim",
-    opts = {
-      wildignore = { "*/tmp/*", "*.so", "*.swp", "*.zip" },
-      fzf_buffer_jump = 1,
-    },
-    keys = {
-      { "<C-F>", "<cmd>Rg<cr>" },
-      { ";", ":Buffers<cr>" },
-    },
+    config = function()
+      vim.g.tlTokenList = { "FIXME", "TODO", "XXX" }
+    end,
   },
   {
     "vim-scripts/vimspell",
@@ -56,9 +42,6 @@ return {
   {
     "tmhedberg/SimpylFold",
     ft = "python",
-  },
-  {
-    "nvim-treesitter/nvim-treesitter",
   },
   {
     "nvim-lua/plenary.nvim",
@@ -119,9 +102,6 @@ return {
         })
       )
     end,
-  },
-  {
-    "folke/which-key.nvim",
   },
   {
     "phaazon/hop.nvim",

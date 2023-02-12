@@ -59,7 +59,7 @@ return {
   },
   {
     "Glench/Vim-Jinja2-Syntax",
-    ft = "html, *.j2, *.jinja",
+    ft = { "html", "*.j2", "*.jinja" },
   },
   {
     "tshirtman/vim-cython",
@@ -90,7 +90,7 @@ return {
   },
   {
     "mattn/emmet-vim",
-    ft = "html, css",
+    ft = { "html", "css" },
   },
   {
     "othree/yajs.vim",
@@ -102,7 +102,7 @@ return {
   },
   {
     "nono/vim-handlebars",
-    ft = "html, *.hbs, *.handlebars",
+    ft = { "html", "*.hbs", "*.handlebars" },
   },
   {
     "elzr/vim-json",
