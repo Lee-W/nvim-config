@@ -61,6 +61,6 @@ vim.api.nvim_create_autocmd("BufNewFile,BufRead", {
 vim.api.nvim_create_autocmd("BufRead", {
   pattern = { "*.txt" },
   callback = function()
-    vim.set.textwidth = 78
+    vim.textwidth = 78
   end,
 })
