@@ -36,3 +36,7 @@ map("v", "`", ":TComment<cr>gv")
 ---ale
 map("n", "<C-k>", "<Plug>(ale_previous_wrap)", { silent = true })
 map("n", "<C-j>", "<Plug>(ale_next_wrap)", { silent = true })
+
+---buffer
+map("n", "gb", ":BufferNext<cr>") ---, { silent = true })
+map("n", "gB", ":BufferPrevious<cr>") ---, { silent = true })
