@@ -14,6 +14,7 @@ return {
             ".hypothesis",
           },
         },
+        git = { ignore = false },
       })
     end,
     keys = {
