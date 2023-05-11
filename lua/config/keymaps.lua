@@ -21,7 +21,7 @@ end
 map("n", "<F3>", "<cmd>ToggleTaskList<cr>")
 
 ----toggle spell checking
-map("n", "<F7>", "setlocal spell!<cr>")
+map("n", "<F7>", "<cmd>setlocal spell!<cr>")
 
 ----toggle ALE
 map("n", "<F8>", "<cmd>ALEToggle<cr>")
