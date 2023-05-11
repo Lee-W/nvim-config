@@ -37,11 +37,11 @@ return {
   },
 
   ---- git
-  {
-    -- replaced with akinsho/git-conflict.nvim
-    "rhysd/conflict-marker.vim",
-    enabled = false,
-  },
+  -- {
+  --   -- replaced with akinsho/git-conflict.nvim
+  --   "rhysd/conflict-marker.vim",
+  --   enabled = false,
+  -- },
 
   ---- snippets
   {
