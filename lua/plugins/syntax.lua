@@ -113,6 +113,14 @@ return {
     "stephpy/vim-yaml",
     ft = "yaml",
   },
+  {
+    "cuducos/yaml.nvim",
+    ft = { "yaml" }, -- optional
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim", -- optional
+    },
+  },
   --------toml
   {
     "cespare/vim-toml",
