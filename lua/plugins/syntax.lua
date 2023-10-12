@@ -110,10 +110,6 @@ return {
   },
   --------YAML
   {
-    "stephpy/vim-yaml",
-    ft = "yaml",
-  },
-  {
     "cuducos/yaml.nvim",
     ft = { "yaml" }, -- optional
     dependencies = {

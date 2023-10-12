@@ -55,9 +55,6 @@ return {
     -- autocmd FileType TelescopePrompt call deoplete#custom#buffer_option('auto_complete', v:false)
   },
   {
-    "nvim-telescope/telescope-fzf-native.nvim",
-  },
-  {
     "lukas-reineke/indent-blankline.nvim",
     opts = {
       show_end_of_line = true,
@@ -131,6 +128,15 @@ return {
         char = {
           jump_labels = true,
         },
+      },
+    },
+  },
+  {
+    "folke/which-key.nvim",
+    optional = true,
+    opts = {
+      defaults = {
+        ["<leader>t"] = { name = "+test" },
       },
     },
   },
