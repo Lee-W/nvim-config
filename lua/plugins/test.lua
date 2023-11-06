@@ -1,14 +1,4 @@
 return {
-  -- {
-  --   "vim-test/vim-test",
-  --   keys = {
-  --     { "<leader>t", ":TestNearest<CR>", { silent = true } },
-  --     { "<leader>T", ":TestFile<CR>", { silent = true } },
-  --     { "<leader>a", ":TestSuite<CR>", { silent = true } },
-  --     { "<leader>l", ":TestLast<CR>", { silent = true } },
-  --     { "<leader>g", ":TestVisit<CR>", { silent = true } },
-  --   },
-  -- },
   { "nvim-neotest/neotest-python" },
   {
     "nvim-neotest/neotest",
