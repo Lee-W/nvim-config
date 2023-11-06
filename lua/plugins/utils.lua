@@ -101,12 +101,6 @@ return {
     end,
   },
   {
-    "phaazon/hop.nvim",
-    opts = {
-      create_hl_autocmd = true,
-    },
-  },
-  {
     "windwp/nvim-autopairs",
     config = function()
       require("nvim-autopairs").setup()
@@ -119,7 +113,7 @@ return {
     "romgrk/barbar.nvim",
   },
   {
-    "henriquehbr/nvim-startup.lua",
+    "dstein64/vim-startuptime",
   },
   {
     "folke/flash.nvim",
@@ -138,6 +132,12 @@ return {
       defaults = {
         ["<leader>t"] = { name = "+test" },
       },
+    },
+  },
+  {
+    "phaazon/hop.nvim",
+    opts = {
+      branch = "v2",
     },
   },
 }
