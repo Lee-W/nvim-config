@@ -73,19 +73,6 @@ return {
               ".hypothesis",
             },
           },
-
-          window = {
-            mappings = {
-              ["/"] = "telescope_find",
-            },
-          },
-          commands = {
-            telescope_find = function(state)
-              local node = state.tree:get_node()
-              local path = node:get_id()
-              require("telescope.builtin").find_files(getTelescopeOpts(state, path))
-            end,
-          },
         },
       })
     end,
