@@ -42,7 +42,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.api.nvim_create_autocmd("BufNewFile,BufRead", {
+vim.api.nvim_create_autocmd("FileType", {
   pattern = { "html", "javascript" },
   callback = function()
     vim.opt_local.ts = 2
@@ -51,7 +51,7 @@ vim.api.nvim_create_autocmd("BufNewFile,BufRead", {
   end,
 })
 
-vim.api.nvim_create_autocmd("BufNewFile,BufRead", {
+vim.api.nvim_create_autocmd("FileType", {
   pattern = { "Dvcfile", "*.dvc", "dvc.lock" },
   callback = function()
     vim.setfiletype = "yaml"
