@@ -3,7 +3,7 @@ return {
   {
     "nvimtools/none-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    dependencies = { "mason.nvim" },
+    dependencies = { "mason.nvim", "nvimtools/none-ls-extras.nvim" },
     opts = function()
       local null_ls = require("null-ls")
       return {
@@ -12,10 +12,8 @@ return {
           -- ## general
           null_ls.builtins.diagnostics.codespell,
           -- ## python
-          null_ls.builtins.diagnostics.ruff,
-          -- null_ls.builtins.diagnostics.mypy,
-          -- null_ls.builtins.diagnostics.bandit.with({ extra_args = { "-iii", "-lll", "-s=B322" } }),
-          null_ls.builtins.diagnostics.pycodestyle,
+          require("none-ls.diagnostics.ruff"),
+          null_ls.builtins.diagnostics.mypy,
           -- ## yaml
           null_ls.builtins.diagnostics.yamllint.with({ extra_args = { "-d", "relaxed" } }),
 
@@ -24,16 +22,13 @@ return {
           null_ls.builtins.completion.spell,
 
           -- # formatting
-          -- ## general
-          null_ls.builtins.formatting.trim_whitespace,
-          null_ls.builtins.formatting.trim_newlines,
           -- ## lua
           null_ls.builtins.formatting.stylua,
           -- ## python
-          null_ls.builtins.formatting.ruff,
+          require("none-ls.formatting.ruff"),
           null_ls.builtins.formatting.black,
           -- ## json
-          null_ls.builtins.formatting.json_tool,
+          -- require("none-ls.formatting.jq"),
           -- ## markdown
           -- null_ls.builtins.formatting.mdformat,
         },
