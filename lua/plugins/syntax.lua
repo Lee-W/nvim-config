@@ -144,4 +144,9 @@ return {
     "rust-lang/rust.vim",
     ft = "rust",
   },
+  ------just file
+  {
+    "NoahTheDuke/vim-just",
+    ft = "just",
+  },
 }
