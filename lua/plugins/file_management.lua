@@ -56,7 +56,8 @@ return {
         window = {
           width = 33,
         },
-        enable_diagnostics = false,
+        enable_git_status = true,
+        enable_diagnostics = true,
         filesystem = {
           filtered_items = {
             visible = false, -- when true, they will just be displayed differently than normal items

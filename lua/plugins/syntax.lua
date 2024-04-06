@@ -45,6 +45,7 @@ return {
   {
     "mitsuhiko/vim-python-combined",
     ft = "python",
+    enabled = false,
   },
   {
     "psf/black",
@@ -106,24 +107,11 @@ return {
     "nono/vim-handlebars",
     ft = { "html", "*.hbs", "*.handlebars" },
   },
-  {
-    "elzr/vim-json",
-    ft = "json",
-  },
-  --------YAML
-  {
-    "cuducos/yaml.nvim",
-    ft = { "yaml" }, -- optional
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-telescope/telescope.nvim", -- optional
-    },
-  },
   --------toml
-  {
-    "cespare/vim-toml",
-    ft = "*.toml",
-  },
+  -- {
+  --   "cespare/vim-toml",
+  --   ft = "*.toml",
+  -- },
   --------markdown
   {
     "godlygeek/tabular",
