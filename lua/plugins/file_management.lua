@@ -42,7 +42,7 @@ return {
     keys = {
       { "<F2>", "<cmd>NvimTreeToggle<cr>" },
     },
-    enabled = false,
+    enabled = true,
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -80,5 +80,6 @@ return {
     keys = {
       { "<F2>", "<cmd>Neotree toggle<cr>" },
     },
+    enabled = false,
   },
 }

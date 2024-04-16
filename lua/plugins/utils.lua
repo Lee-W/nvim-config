@@ -6,6 +6,9 @@ return {
     "majutsushi/tagbar",
   },
   {
+    "akinsho/bufferline.nvim",
+  },
+  {
     "liangfeng/TaskList.vim",
     config = function()
       vim.g.tlTokenList = { "FIXME", "TODO", "XXX" }
@@ -44,15 +47,22 @@ return {
     ft = "python",
   },
   {
-    "nvim-lua/plenary.nvim",
-  },
-  {
     "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "BurntSushi/ripgrep",
+      "sharkdp/fd",
+      "nvim-treesitter/nvim-treesitter",
+    },
     keys = {
       { "<C-P>", "<cmd>Telescope find_files<cr>" },
       { "<C-B>", "<cmd>Telescope grep_string<cr>" },
     },
     -- autocmd FileType TelescopePrompt call deoplete#custom#buffer_option('auto_complete', v:false)
+  },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
   },
   {
     "lukas-reineke/indent-blankline.nvim",
