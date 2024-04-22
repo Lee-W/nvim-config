@@ -65,17 +65,6 @@ return {
     build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
   },
   {
-    "lukas-reineke/indent-blankline.nvim",
-    opts = {
-      show_end_of_line = true,
-      show_current_context = true,
-    },
-    config = function()
-      vim.opt.listchars:append("space:⋅")
-      vim.opt.listchars:append("eol:↴")
-    end,
-  },
-  {
     "kevinhwang91/nvim-hlslens",
     config = function()
       require("hlslens").setup()
@@ -169,25 +158,5 @@ return {
         vim.keymap.set("n", "<leader>tf", require("illuminate").toggle_freeze_buf, { desc = "[F]reeze Illuminate" })
       end,
     },
-  },
-  {
-    "echasnovski/mini.indentscope",
-    version = false,
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      symbol = "│",
-      options = { try_as_border = true },
-    },
-    init = function()
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "help", "dashboard", "NvimTree", "lazy", "mason" },
-        callback = function()
-          vim.b.miniidentscope_disable = true
-        end,
-      })
-    end,
-    config = function(_, opts)
-      require("mini.indentscope").setup(opts)
-    end,
   },
 }
