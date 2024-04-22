@@ -141,6 +141,7 @@ return {
   },
   {
     "RRethy/vim-illuminate",
+    event = "VeryLazy",
     opts = {
       config = function(opts)
         require("illuminate").configure({
@@ -158,5 +159,19 @@ return {
         vim.keymap.set("n", "<leader>tf", require("illuminate").toggle_freeze_buf, { desc = "[F]reeze Illuminate" })
       end,
     },
+  },
+  {
+    "SmiteshP/nvim-navbuddy",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "SmiteshP/nvim-navic",
+      "MunifTanjim/nui.nvim",
+      "numToStr/Comment.nvim", -- Optional
+      "nvim-telescope/telescope.nvim", -- Optional
+    },
+    event = "VeryLazy",
+    cmd = "Navbuddy",
+    keys = { { "<F9>", "<CMD>Navbuddy<CR>", desc = "Navbuddy" } },
+    opts = { lsp = { auto_attach = true }, window = { size = "80%" } },
   },
 }
