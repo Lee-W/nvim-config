@@ -30,8 +30,8 @@ return {
           -- ## lua
           null_ls.builtins.formatting.stylua,
           -- ## python
-          require("none-ls.formatting.ruff"),
           null_ls.builtins.formatting.black,
+          require("none-ls.formatting.ruff"),
           -- ## yaml
           -- require("none-ls.formatting.yq"),
           -- ## json

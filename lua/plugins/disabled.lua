@@ -13,11 +13,6 @@ return {
   --   enabled = false,
   -- },
   -- {
-  --   -- replaced by lazyvim setup
-  --   "nvimdev/dashboard-nvim",
-  --   enabled = false,
-  -- },
-  -- {
   -- cannot setup correctly as of now, but lazyvim's default setting works
   -- "junegunn/fzf",
   -- enabled = false,
@@ -34,13 +29,6 @@ return {
   --   { ";", ":Buffers<cr>" },
   -- },
   -- enabled = false,
-  -- },
-
-  ---- git
-  -- {
-  --   -- replaced with akinsho/git-conflict.nvim
-  --   "rhysd/conflict-marker.vim",
-  --   enabled = false,
   -- },
 
   ---- snippets

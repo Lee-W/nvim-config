@@ -150,4 +150,44 @@ return {
       branch = "v2",
     },
   },
+  {
+    "RRethy/vim-illuminate",
+    opts = {
+      config = function(opts)
+        require("illuminate").configure({
+          filetypes_denylist = {
+            "dirvish",
+            "fugitive",
+            "md",
+            "org",
+            "norg",
+            "NvimTree",
+          },
+        })
+
+        vim.keymap.set("n", "<leader>ti", "<cmd>IlluminateToggle<CR>", { desc = "[T]oggle [I]lluminate" })
+        vim.keymap.set("n", "<leader>tf", require("illuminate").toggle_freeze_buf, { desc = "[F]reeze Illuminate" })
+      end,
+    },
+  },
+  {
+    "echasnovski/mini.indentscope",
+    version = false,
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      symbol = "│",
+      options = { try_as_border = true },
+    },
+    init = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "help", "dashboard", "NvimTree", "lazy", "mason" },
+        callback = function()
+          vim.b.miniidentscope_disable = true
+        end,
+      })
+    end,
+    config = function(_, opts)
+      require("mini.indentscope").setup(opts)
+    end,
+  },
 }
