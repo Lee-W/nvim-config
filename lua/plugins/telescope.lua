@@ -13,10 +13,22 @@ return {
       { "<C-P>", "<cmd>Telescope find_files<cr>" },
       { "<C-B>", "<cmd>Telescope grep_string<cr>" },
     },
-    -- autocmd FileType TelescopePrompt call deoplete#custom#buffer_option('auto_complete', v:false)
+    config = function()
+      require("telescope").setup({
+        file_ignore_patterns = {
+          ".git/.*",
+          ".DS_Store",
+        },
+      })
+      require("telescope").load_extension("file_browser")
+    end,
   },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
     build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+  },
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
   },
 }
