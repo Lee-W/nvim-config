@@ -46,6 +46,7 @@ return {
     "tmhedberg/SimpylFold",
     ft = "python",
   },
+  -- Fuzzy Finder (files, lsp, etc)
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
@@ -54,6 +55,7 @@ return {
       "sharkdp/fd",
       "nvim-treesitter/nvim-treesitter",
     },
+    build = ":TSUpdate",
     keys = {
       { "<C-P>", "<cmd>Telescope find_files<cr>" },
       { "<C-B>", "<cmd>Telescope grep_string<cr>" },
@@ -173,5 +175,34 @@ return {
     cmd = "Navbuddy",
     keys = { { "<F9>", "<CMD>Navbuddy<CR>", desc = "Navbuddy" } },
     opts = { lsp = { auto_attach = true }, window = { size = "80%" } },
+  },
+  {
+    -- Highlight, edit, and navigate code
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+    },
+    opts = {
+      -- Add languages to be installed here that you want installed for treesitter
+      ensure_installed = {
+        "c",
+        "lua",
+        "python",
+        "json",
+        "just",
+        "query",
+        "vim",
+        "yaml",
+        "markdown",
+      },
+      highlight = { enable = true },
+      indent = { enable = true, disable = { "python" } },
+    },
+    config = function(_, opts)
+      -- pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+      require("nvim-treesitter.configs").setup(opts)
+    end,
   },
 }
