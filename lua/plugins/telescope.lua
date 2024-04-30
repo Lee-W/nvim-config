@@ -10,11 +10,16 @@ return {
     },
     build = ":TSUpdate",
     keys = {
-      { "<C-P>", "<cmd>Telescope find_files<cr>" },
+      { "<C-P>", "<cmd>Telescope find_files find_command=rg,--files,--hidden,-g,!.git<cr>" },
       { "<C-B>", "<cmd>Telescope grep_string<cr>" },
     },
     config = function()
       require("telescope").setup({
+        pickers = {
+          find_files = {
+            hidden = true,
+          },
+        },
         file_ignore_patterns = {
           ".git/.*",
           ".DS_Store",

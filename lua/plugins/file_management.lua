@@ -7,14 +7,6 @@ return {
     lazy = false,
     config = function()
       require("nvim-tree").setup({
-        renderer = {
-          show = {
-            folder = true,
-          },
-        },
-        indent_markers = {
-          enable = false,
-        },
         filters = {
           custom = {
             "^\\.git$",
