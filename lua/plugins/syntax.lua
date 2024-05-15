@@ -1,29 +1,6 @@
 return {
   --------overall
   {
-    "w0rp/ale",
-    config = function()
-      vim.g.ale_linters.python = { "ruff", "mypy", "bandit" }
-      vim.g.ale_lint_on_enter = 0
-      vim.g.ale_lint_on_text_changed = "never"
-      vim.g.ale_linters_explicit = 1
-
-      local fixers = {}
-      fixers["*"] = { "remove_trailing_lines", "trim_whitespace" }
-      fixers["python"] = { "black", "ruff" }
-      vim.g.ale_fixers = fixers
-      vim.g.ale_fix_on_save = 1
-      vim.g.ale_python_bandit_options = "-iii -lll -s=B322"
-      -- vim.g.ale_python_flake8_options = "--ignore=W503,E501,F632,E203 --max-line-length=88"
-      vim.g.ale_python_mypy_options = "--ignore-missing-imports"
-      vim.g.ale_python_auto_pipenv = 1
-      vim.g.ale_yaml_yamllint_options = "-d relaxed"
-      vim.g.ale_open_list = 1
-      vim.g.ale_list_window_size = 6
-    end,
-    enabled = false,
-  },
-  {
     "sheerun/vim-polyglot",
     enabled = false,
   },
@@ -41,6 +18,7 @@ return {
       vim.g.pymode_folding = 0
       vim.g.pymode_options_max_line_length = 88
     end,
+    enabled = false,
   },
   {
     "mitsuhiko/vim-python-combined",

@@ -15,11 +15,7 @@ return {
           -- # diagnostics
           -- ## general
           null_ls.builtins.diagnostics.codespell,
-          -- ## python
-          require("none-ls.diagnostics.ruff"),
-          null_ls.builtins.diagnostics.mypy,
           -- ## yaml
-          null_ls.builtins.diagnostics.yamllint.with({ extra_args = { "-d", "relaxed" } }),
           null_ls.builtins.diagnostics.actionlint,
 
           -- # completion
@@ -29,15 +25,6 @@ return {
           -- # formatting
           -- ## lua
           null_ls.builtins.formatting.stylua,
-          -- ## python
-          null_ls.builtins.formatting.black,
-          require("none-ls.formatting.ruff"),
-          -- ## yaml
-          -- require("none-ls.formatting.yq"),
-          -- ## json
-          -- require("none-ls.formatting.jq"),
-          -- ## markdown
-          -- null_ls.builtins.formatting.mdformat,
         },
       }
     end,
@@ -49,5 +36,31 @@ return {
       "williamboman/mason.nvim",
       "nvimtools/none-ls.nvim",
     },
+  },
+  {
+    "dense-analysis/ale",
+    config = function()
+      -- Configuration goes here.
+      local g = vim.g
+
+      local fixers = {}
+      fixers["*"] = { "remove_trailing_lines", "trim_whitespace" }
+      fixers["python"] = { "black", "ruff_format" }
+      g.ale_fixers = fixers
+
+      g.ale_linters = {
+        lua = { "lua_language_server" },
+        python = { "ruff", "mypy" },
+        dockerfile = { "hadolint" },
+      }
+      g.ale_fix_on_save = 1
+      g.ale_fix_on_save = 1
+      g.ale_python_bandit_options = "-iii -lll -s=B322"
+      g.ale_python_mypy_options = "--ignore-missing-imports"
+      g.ale_python_auto_pipenv = 1
+      g.ale_yaml_yamllint_options = "-d relaxed"
+      g.ale_open_list = 1
+      g.ale_list_window_size = 6
+    end,
   },
 }
