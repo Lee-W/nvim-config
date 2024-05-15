@@ -38,6 +38,17 @@ return {
     },
   },
   {
+    -- change nvim-lspconfig options
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        pyright = {
+          autostart = false,
+        },
+      },
+    },
+  },
+  {
     "dense-analysis/ale",
     config = function()
       -- Configuration goes here.
