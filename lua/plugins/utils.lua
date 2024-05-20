@@ -123,23 +123,26 @@ return {
   },
   {
     "RRethy/vim-illuminate",
-    event = "VeryLazy",
+    -- event = "VeryLazy",
     opts = {
-      config = function(opts)
-        require("illuminate").configure({
-          filetypes_denylist = {
-            "dirvish",
-            "fugitive",
-            "md",
-            "org",
-            "norg",
-            "NvimTree",
-          },
-        })
-
-        vim.keymap.set("n", "<leader>ti", "<cmd>IlluminateToggle<CR>", { desc = "[T]oggle [I]lluminate" })
-        vim.keymap.set("n", "<leader>tf", require("illuminate").toggle_freeze_buf, { desc = "[F]reeze Illuminate" })
-      end,
+      filetypes_denylist = {
+        "dirvish",
+        "fugitive",
+        "md",
+        "org",
+        "norg",
+        "NvimTree",
+      },
+    },
+    keys = {
+      { "<leader>ti", "<cmd>IlluminateToggle<CR>", desc = "[T]oggle [I]lluminate" },
+      {
+        "<leader>tf",
+        function()
+          require("illuminate").toggle_freeze_buf()
+        end,
+        desc = "[F]reeze Illuminate",
+      },
     },
   },
   {
