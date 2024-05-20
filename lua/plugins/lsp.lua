@@ -15,6 +15,11 @@ return {
           -- # diagnostics
           -- ## general
           null_ls.builtins.diagnostics.codespell,
+
+          -- ## python
+          require("none-ls.diagnostics.ruff"),
+          null_ls.builtins.diagnostics.mypy,
+
           -- ## yaml
           null_ls.builtins.diagnostics.actionlint,
 
@@ -61,14 +66,14 @@ return {
 
       g.ale_linters = {
         lua = { "lua_language_server" },
-        python = { "ruff", "mypy" },
+        python = {},
         dockerfile = { "hadolint" },
       }
       g.ale_fix_on_save = 1
       g.ale_fix_on_save = 1
       g.ale_python_bandit_options = "-iii -lll -s=B322"
       g.ale_python_mypy_options = "--ignore-missing-imports"
-      g.ale_python_auto_pipenv = 1
+      g.ale_python_auto_virtualenv = 1
       g.ale_yaml_yamllint_options = "-d relaxed"
       g.ale_open_list = 1
       g.ale_list_window_size = 6
