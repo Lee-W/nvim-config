@@ -22,6 +22,9 @@ require("lazy").setup({
     -- util
     { import = "lazyvim.plugins.extras.util.gitui" },
     { import = "lazyvim.plugins.extras.util.dot" },
+
+    -- ui
+    { import = "lazyvim.plugins.extras.ui.mini-indentscope" },
     -- import/override with your plugins
     { import = "plugins" },
   },
