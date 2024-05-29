@@ -27,7 +27,6 @@ return {
           -- ## general
           null_ls.builtins.completion.spell,
 
-          -- # formatting
           -- ## lua
           null_ls.builtins.formatting.stylua,
         },
@@ -61,7 +60,7 @@ return {
 
       local fixers = {}
       fixers["*"] = { "remove_trailing_lines", "trim_whitespace" }
-      fixers["python"] = { "black", "ruff_format" }
+      fixers["python"] = { "black", "ruff_format", "ruff" }
       g.ale_fixers = fixers
 
       g.ale_linters = {
