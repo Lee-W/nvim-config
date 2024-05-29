@@ -11,7 +11,7 @@ opt.nu = true --  show line number
 opt.cursorline = true --  show the location of cursor
 opt.background = "dark"
 opt.ruler = true
-opt.hlsearch = true --  highlight serach reslt
+opt.hlsearch = true --  highlight search reslt
 opt.incsearch = true --  jump to the matching string when typing
 
 opt.confirm = true
@@ -26,7 +26,7 @@ opt.shiftwidth = 4
 opt.tabstop = 4
 opt.softtabstop = 4
 opt.smarttab = true
-opt.expandtab = true --  covert tab to space, you can use [Ctrl + V + Tab] if tab is needed
+opt.expandtab = true --  Convert tab to space, you can use [Ctrl + V + Tab] if tab is needed
 opt.hidden = true
 opt.splitbelow = true
 opt.splitright = true
