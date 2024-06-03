@@ -2,7 +2,6 @@ return {
   {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "neovim/nvim-lspconfig",
   },
   {
     "nvimtools/none-ls.nvim",
@@ -44,10 +43,39 @@ return {
   {
     -- change nvim-lspconfig options
     "neovim/nvim-lspconfig",
+    dependencies = {
+      {
+        "SmiteshP/nvim-navbuddy",
+        dependencies = {
+          "SmiteshP/nvim-navic",
+          "MunifTanjim/nui.nvim",
+          "numToStr/Comment.nvim", -- Optional
+          "nvim-telescope/telescope.nvim", -- Optional
+        },
+        event = "VeryLazy",
+        cmd = "Navbuddy",
+        keys = { { "<F9>", "<CMD>Navbuddy<CR>", desc = "Navbuddy" } },
+        opts = { lsp = { auto_attach = true } },
+        window = { size = "80%" },
+      },
+    },
     opts = {
       servers = {
         pyright = {
-          autostart = false,
+          disableOrganizeImports = true, -- Using Ruff
+          reportMissingImports = false,
+          reportCallIssue = false,
+          -- autostart = false,
+        },
+        -- basedpyright = {},
+      },
+      setup = {
+        python = {
+          analysis = {
+            ignore = { "*" }, -- Using Ruff
+            typeCheckingMode = "off", -- Using mypy
+            diagnosticMode = "off",
+          },
         },
       },
     },

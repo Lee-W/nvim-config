@@ -146,20 +146,6 @@ return {
     },
   },
   {
-    "SmiteshP/nvim-navbuddy",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "SmiteshP/nvim-navic",
-      "MunifTanjim/nui.nvim",
-      "numToStr/Comment.nvim", -- Optional
-      "nvim-telescope/telescope.nvim", -- Optional
-    },
-    event = "VeryLazy",
-    cmd = "Navbuddy",
-    keys = { { "<F9>", "<CMD>Navbuddy<CR>", desc = "Navbuddy" } },
-    opts = { lsp = { auto_attach = true }, window = { size = "80%" } },
-  },
-  {
     -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
