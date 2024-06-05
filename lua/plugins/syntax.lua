@@ -44,6 +44,10 @@ return {
     branch = "regexp",
     opts = {
       -- auto_refresh = true,
+      enable_cached_venvs = true,
+      activate_venv_in_terminal = true,
+      show_telescope_search_type = true,
+      notify_user_on_venv_activation = true,
     },
     event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
     keys = {
@@ -52,6 +56,17 @@ return {
       -- Keymap to retrieve the venv from a cache (the one previously used for the same project directory).
       { "<leader>vc", "<cmd>VenvSelectCached<cr>" },
     },
+    config = function()
+      require("venv-selector").setup({
+        settings = {
+          search = {
+            pyenv_virtualenvs = {
+              command = "fd 'versions/([0-9.]+)/envs/.*/bin/python$' ~/.pyenv/versions --full-path --color never -E /proc",
+            },
+          },
+        },
+      })
+    end,
   },
   {
     "Glench/Vim-Jinja2-Syntax",
