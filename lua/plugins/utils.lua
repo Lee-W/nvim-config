@@ -122,30 +122,6 @@ return {
     },
   },
   {
-    "RRethy/vim-illuminate",
-    -- event = "VeryLazy",
-    opts = {
-      filetypes_denylist = {
-        "dirvish",
-        "fugitive",
-        "md",
-        "org",
-        "norg",
-        "NvimTree",
-      },
-    },
-    keys = {
-      { "<leader>ti", "<cmd>IlluminateToggle<CR>", desc = "[T]oggle [I]lluminate" },
-      {
-        "<leader>tf",
-        function()
-          require("illuminate").toggle_freeze_buf()
-        end,
-        desc = "[F]reeze Illuminate",
-      },
-    },
-  },
-  {
     -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
