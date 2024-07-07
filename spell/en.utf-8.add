@@ -1,2 +1,4 @@
 commitizen
 weaviate
+docstring
+mypy
