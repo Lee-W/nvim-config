@@ -16,7 +16,7 @@ return {
           null_ls.builtins.diagnostics.codespell,
 
           -- ## python
-          require("none-ls.diagnostics.ruff"),
+          -- require("none-ls.diagnostics.ruff"),
           null_ls.builtins.diagnostics.mypy,
 
           -- ## yaml
@@ -93,8 +93,10 @@ return {
 
       g.ale_linters = {
         lua = { "lua_language_server" },
+        -- python = { "mypy" },
         python = {},
         dockerfile = { "hadolint" },
+        yaml = {},
       }
       g.ale_fix_on_save = 1
       g.ale_fix_on_save = 1
