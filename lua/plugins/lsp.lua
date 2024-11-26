@@ -3,43 +3,45 @@ return {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
   },
-  {
-    "nvimtools/none-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = { "nvimtools/none-ls-extras.nvim" },
-    opts = function()
-      local null_ls = require("null-ls")
-      return {
-        sources = {
-          -- # diagnostics
-          -- ## general
-          null_ls.builtins.diagnostics.codespell,
-
-          -- ## python
-          -- require("none-ls.diagnostics.ruff"),
-          null_ls.builtins.diagnostics.mypy,
-
-          -- ## yaml
-          null_ls.builtins.diagnostics.actionlint,
-
-          -- # completion
-          -- ## general
-          null_ls.builtins.completion.spell,
-
-          -- ## lua
-          null_ls.builtins.formatting.stylua,
-        },
-      }
-    end,
-  },
-  {
-    "jay-babu/mason-null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "williamboman/mason.nvim",
-      "nvimtools/none-ls.nvim",
-    },
-  },
+  -- {
+  --   "nvimtools/none-ls.nvim",
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   dependencies = { "nvimtools/none-ls-extras.nvim" },
+  --   enable = false,
+  --   opts = function()
+  --     local null_ls = require("null-ls")
+  --     return {
+  --       sources = {
+  --         -- # diagnostics
+  --         -- ## general
+  --         null_ls.builtins.diagnostics.codespell,
+  --
+  --         -- ## python
+  --         -- require("none-ls.diagnostics.ruff"),
+  --         null_ls.builtins.diagnostics.mypy,
+  --
+  --         -- ## yaml
+  --         null_ls.builtins.diagnostics.actionlint,
+  --
+  --         -- # completion
+  --         -- ## general
+  --         null_ls.builtins.completion.spell,
+  --
+  --         -- ## lua
+  --         null_ls.builtins.formatting.stylua,
+  --       },
+  --     }
+  --   end,
+  -- },
+  -- {
+  --   "jay-babu/mason-null-ls.nvim",
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   enable = false,
+  --   dependencies = {
+  --     "williamboman/mason.nvim",
+  --     "nvimtools/none-ls.nvim",
+  --   },
+  -- },
   {
     -- change nvim-lspconfig options
     "neovim/nvim-lspconfig",
