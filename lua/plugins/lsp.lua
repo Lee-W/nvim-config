@@ -88,11 +88,6 @@ return {
       -- Configuration goes here.
       local g = vim.g
 
-      local fixers = {}
-      fixers["*"] = { "remove_trailing_lines", "trim_whitespace" }
-      fixers["python"] = { "black", "ruff_format", "ruff" }
-      g.ale_fixers = fixers
-
       g.ale_linters = {
         lua = { "lua_language_server" },
         -- python = { "mypy" },
