@@ -18,7 +18,7 @@ local function map(mode, lhs, rhs, opts)
 end
 
 ----rename
-map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
+-- map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
 
 ----toggl TaskList
 map("n", "<F3>", "<cmd>ToggleTaskList<cr>")
