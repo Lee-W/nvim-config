@@ -1,8 +1,6 @@
 return {
   ---- utils
   {
-    -- not used
-
     "nvim-pack/nvim-spectre",
     -- nnoremap <leader>S :lua require('spectre').open()<CR>
     -- "search current word
@@ -37,4 +35,46 @@ return {
   --   config = true,
   --   enabled = false,
   -- },
+
+  ---- telescope
+  -- Fuzzy Finder (files, lsp, etc)
+  {
+    "nvim-telescope/telescope.nvim",
+    enabled = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "BurntSushi/ripgrep",
+      "sharkdp/fd",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    build = ":TSUpdate",
+    keys = {
+      { "<C-P>", "<cmd>Telescope find_files find_command=rg,--files,--hidden,-g,!.git<cr>" },
+      { "<C-B>", "<cmd>Telescope grep_string<cr>" },
+    },
+    config = function()
+      require("telescope").setup({
+        pickers = {
+          find_files = {
+            hidden = true,
+          },
+        },
+        file_ignore_patterns = {
+          ".git/.*",
+          ".DS_Store",
+        },
+      })
+      require("telescope").load_extension("file_browser")
+    end,
+  },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    enabled = false,
+    build = "make",
+  },
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    enabled = false,
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+  },
 }
