@@ -32,6 +32,8 @@ require("lazy").setup({
     -- coding
     { import = "lazyvim.plugins.extras.coding.mini-surround" },
     { import = "lazyvim.plugins.extras.coding.yanky" },
+    -- test
+    { import = "lazyvim.plugins.extras.test.core" },
     -- util
     { import = "lazyvim.plugins.extras.util.gitui" },
     { import = "lazyvim.plugins.extras.util.dot" },
