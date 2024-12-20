@@ -34,6 +34,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.coding.yanky" },
     { import = "lazyvim.plugins.extras.coding.nvim-cmp" },
     { import = "lazyvim.plugins.extras.coding.luasnip" },
+    { import = "lazyvim.plugins.extras.coding.neogen" },
     -- test
     { import = "lazyvim.plugins.extras.test.core" },
     -- util
