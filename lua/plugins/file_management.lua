@@ -26,7 +26,7 @@ return {
     keys = {
       { "<F2>", "<cmd>NvimTreeToggle<cr>" },
     },
-    enabled = true,
+    enabled = false,
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
