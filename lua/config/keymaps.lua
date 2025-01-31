@@ -19,7 +19,7 @@ end
 
 ----rename
 -- map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
-map("n", "<F2>", "<cmd>lua Snacks.picker.explorer()<cr>")
+map("n", "<F2>", "<cmd>lua Snacks.picker.explorer({hidden=true})<cr>")
 
 ----toggl TaskList
 map("n", "<F3>", "<cmd>ToggleTaskList<cr>")
