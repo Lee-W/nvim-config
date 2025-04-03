@@ -44,27 +44,22 @@ return {
       "neovim/nvim-lspconfig",
       "mfussenegger/nvim-dap",
       "mfussenegger/nvim-dap-python", --optional
-      {
-        "nvim-telescope/telescope.nvim",
-        branch = "0.1.x",
-        dependencies = { "nvim-lua/plenary.nvim" }
-      },
     },
-    lazy = false,
+    ft = "python",
     branch = "regexp", -- This is the regexp branch, use this for the new version
+    keys = {
+      { ",v", "<cmd>VenvSelect<cr>" },
+    },
     opts = {
       -- auto_refresh = true,
       enable_cached_venvs = true,
       activate_venv_in_terminal = true,
       show_telescope_search_type = true,
       notify_user_on_venv_activation = true,
+      picker = "fzf-lua",
     },
-    config = function()
-      require("venv-selector").setup()
-    end,
-    keys = {
-      { ",v", "<cmd>VenvSelect<cr>" },
-    },
+    lazy = true,
+    -- enabled = false,
   },
   {
     "Glench/Vim-Jinja2-Syntax",
