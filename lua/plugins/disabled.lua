@@ -101,4 +101,39 @@ return {
     },
     enabled = false,
   },
+  -- syntax
+  ---- python
+  {
+    "python-mode/python-mode",
+    ft = "python",
+    config = function()
+      vim.g.pymode_lint = 0
+      vim.g.pymode_python = "python3"
+      vim.g.pymode_indent = 1
+      vim.g.pymode_motion = 1
+      -- vim.g.pymode_rope = 1
+      vim.g.pymode_lint = 0
+      vim.g.pymode_folding = 0
+      vim.g.pymode_options_max_line_length = 88
+    end,
+    enabled = false,
+  },
+  {
+    "mitsuhiko/vim-python-combined",
+    ft = "python",
+    enabled = false,
+  },
+  {
+    "psf/black",
+    ft = "python",
+    config = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "python" },
+        callback = function()
+          vim.opt_local.completeopt = "preview"
+        end,
+      })
+    end,
+    enabled = false,
+  },
 }
