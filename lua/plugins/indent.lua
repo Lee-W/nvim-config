@@ -1,5 +1,6 @@
 return {
   {
+    -- included in lazyvim (customize behavior)
     "lukas-reineke/indent-blankline.nvim",
     opts = {
       show_end_of_line = true,
