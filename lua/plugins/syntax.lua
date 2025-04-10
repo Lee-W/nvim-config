@@ -59,7 +59,7 @@ return {
       picker = "fzf-lua",
     },
     lazy = true,
-    -- enabled = false,
+    enabled = true,
   },
   {
     "Glench/Vim-Jinja2-Syntax",

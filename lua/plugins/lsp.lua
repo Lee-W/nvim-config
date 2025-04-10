@@ -56,7 +56,7 @@ return {
 
       g.ale_linters = {
         lua = { "lua_language_server" },
-        python = { "mypy", "bandit" },
+        python = { "mypy", "bandit", "ruff" },
         dockerfile = { "hadolint" },
         yaml = {},
       }
@@ -65,6 +65,8 @@ return {
       g.ale_python_mypy_options = "--ignore-missing-imports"
       g.ale_python_auto_virtualenv = 1
       g.ale_python_auto_uv = 1
+      g.ale_python_ruff_auto_uv = 1
+      g.ale_python_ruff_format_auto_uv = 1
       g.ale_yaml_yamllint_options = "-d relaxed"
       g.ale_open_list = 1
       g.ale_list_window_size = 6
