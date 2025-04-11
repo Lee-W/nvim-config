@@ -29,9 +29,6 @@ return {
     "terryma/vim-expand-region",
   },
   {
-    "machakann/vim-highlightedyank",
-  },
-  {
     "vim-scripts/dbext.vim",
   },
   {
