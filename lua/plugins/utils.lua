@@ -98,6 +98,9 @@ return {
   {
     -- easier serach
     "kevinhwang91/nvim-hlslens",
+    config = function()
+      require("hlslens").setup()
+    end,
   },
   -- included in lazyvim (customize behavior)
   {
