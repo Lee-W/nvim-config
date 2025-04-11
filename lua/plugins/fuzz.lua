@@ -1,5 +1,6 @@
 return {
   {
+    -- included in lazyvim (customize behavior)
     "ibhagwan/fzf-lua",
     -- optional for icon support
     dependencies = { "nvim-tree/nvim-web-devicons" },
