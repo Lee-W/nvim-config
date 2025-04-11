@@ -38,12 +38,6 @@ return {
     "kevinhwang91/nvim-hlslens",
   },
   {
-    "windwp/nvim-autopairs",
-    config = function()
-      require("nvim-autopairs").setup()
-    end,
-  },
-  {
     "romgrk/barbar.nvim",
   },
   {
