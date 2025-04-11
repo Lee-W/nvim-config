@@ -3,6 +3,10 @@ return {
     "editorconfig/editorconfig-vim",
   },
   {
+    -- Clipboard manager
+    "AckslD/nvim-neoclip.lua",
+  },
+  {
     "majutsushi/tagbar",
   },
   {
@@ -37,25 +41,7 @@ return {
     -- easier serach
     "kevinhwang91/nvim-hlslens",
   },
-  {
-    "romgrk/barbar.nvim",
-  },
-  {
-    "folke/flash.nvim",
-    opts = {
-      modes = {
-        char = {
-          jump_labels = true,
-        },
-      },
-    },
-  },
-  {
-    "phaazon/hop.nvim",
-    opts = {
-      branch = "v2",
-    },
-  },
+  -- included in lazyvim (customize behavior)
   {
     -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
@@ -84,5 +70,15 @@ return {
       -- pcall(require("nvim-treesitter.install").update({ with_sync = true }))
       require("nvim-treesitter.configs").setup(opts)
     end,
+  },
+  {
+    "folke/flash.nvim",
+    opts = {
+      modes = {
+        char = {
+          jump_labels = true,
+        },
+      },
+    },
   },
 }
