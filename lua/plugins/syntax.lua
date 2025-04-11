@@ -53,16 +53,7 @@ return {
     "nono/vim-handlebars",
     ft = { "html", "*.hbs", "*.handlebars" },
   },
-  --------toml
-  -- {
-  --   "cespare/vim-toml",
-  --   ft = "*.toml",
-  -- },
   --------markdown
-  {
-    "godlygeek/tabular",
-    ft = "markdown",
-  },
   {
     "plasticboy/vim-markdown",
     ft = "markdown",
