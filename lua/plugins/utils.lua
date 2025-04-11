@@ -7,8 +7,13 @@ return {
     "AckslD/nvim-neoclip.lua",
   },
   {
+    -- code outline window
     "stevearc/aerial.nvim",
-    opts = {},
+    opts = {
+      layout = {
+        default_direction = "prefer_left",
+      },
+    },
     -- Optional dependencies
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
