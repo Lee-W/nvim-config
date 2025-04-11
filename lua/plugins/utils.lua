@@ -29,9 +29,6 @@ return {
     "terryma/vim-expand-region",
   },
   {
-    "vim-scripts/dbext.vim",
-  },
-  {
     "tmhedberg/SimpylFold",
     ft = "python",
   },
