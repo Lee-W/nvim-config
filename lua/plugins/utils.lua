@@ -75,14 +75,11 @@ return {
     "romgrk/barbar.nvim",
   },
   {
-    "dstein64/vim-startuptime",
-  },
-  {
     "folke/flash.nvim",
     opts = {
       modes = {
         char = {
-          jump_labels = true,
+          -- jump_labels = true,
         },
       },
     },
