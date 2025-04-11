@@ -34,13 +34,8 @@ return {
     ft = "python",
   },
   {
+    -- easier serach
     "kevinhwang91/nvim-hlslens",
-    config = function()
-      require("hlslens").setup()
-    end,
-  },
-  {
-    "yamatsum/nvim-cursorline",
   },
   {
     "windwp/nvim-autopairs",
