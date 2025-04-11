@@ -6,9 +6,6 @@ return {
     "majutsushi/tagbar",
   },
   {
-    "akinsho/bufferline.nvim",
-  },
-  {
     "liangfeng/TaskList.vim",
     config = function()
       vim.g.tlTokenList = { "FIXME", "TODO", "XXX" }
@@ -53,13 +50,6 @@ return {
     end,
   },
   {
-    "nvim-lualine/lualine.nvim",
-    opts = {
-      options = { theme = "nightfox" },
-      extensions = { "nvim-tree", "fugitive" },
-    },
-  },
-  {
     "yamatsum/nvim-cursorline",
   },
   {
@@ -69,9 +59,6 @@ return {
     end,
   },
   {
-    "AckslD/nvim-neoclip.lua",
-  },
-  {
     "romgrk/barbar.nvim",
   },
   {
@@ -79,14 +66,10 @@ return {
     opts = {
       modes = {
         char = {
-          -- jump_labels = true,
+          jump_labels = true,
         },
       },
     },
-  },
-  {
-    "folke/which-key.nvim",
-    optional = true,
   },
   {
     "phaazon/hop.nvim",
