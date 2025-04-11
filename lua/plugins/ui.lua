@@ -1,7 +1,7 @@
 return {
   {
     -- tab line
-    "AckslD/nvim-neoclip.lua",
+    "romgrk/barbar.nvim",
   },
   {
     -- included in lazyvim (customize behavior)

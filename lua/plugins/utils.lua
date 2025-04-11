@@ -102,6 +102,7 @@ return {
       require("hlslens").setup()
     end,
   },
+  { "akinsho/toggleterm.nvim", version = "*", config = true },
   -- included in lazyvim (customize behavior)
   {
     -- Highlight, edit, and navigate code
