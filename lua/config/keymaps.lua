@@ -29,8 +29,8 @@ map("n", "<F7>", "<cmd>setlocal spell!<cr>")
 ----toggle ALE
 -- map("n", "<F8>", "<cmd>ALEToggle<cr>")
 
-----toogle tagbar
-map("n", "<F10>", "<cmd>TagbarToggle<cr>")
+----toogle AerialToggle[!]
+map("n", "<F10>", "<cmd>AerialToggle<cr>")
 
 ----tcomment
 map("n", "`", "<cmd>TComment<cr>")
