@@ -25,9 +25,7 @@ return {
     "tpope/vim-repeat",
   },
   {
-    "tpope/vim-surround",
-  },
-  {
+    -- use +/_ to expand/shrink select region
     "terryma/vim-expand-region",
   },
   {
