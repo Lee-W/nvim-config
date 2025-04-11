@@ -29,6 +29,7 @@ return {
     "terryma/vim-expand-region",
   },
   {
+    -- folding for Python
     "tmhedberg/SimpylFold",
     ft = "python",
   },
