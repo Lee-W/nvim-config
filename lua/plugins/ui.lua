@@ -11,4 +11,7 @@ return {
       extensions = { "nvim-tree", "fugitive" },
     },
   },
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+  },
 }

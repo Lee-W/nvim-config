@@ -25,9 +25,6 @@ return {
     "tpope/vim-repeat",
   },
   {
-    "luochen1990/rainbow",
-  },
-  {
     "tpope/vim-surround",
   },
   {
