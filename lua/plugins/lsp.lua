@@ -44,6 +44,17 @@ return {
     },
   },
   {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        python = { "ruff", "ruff_format" },
+        rust = { "rustfmt", lsp_format = "fallback" },
+        -- ["*"] = { "codespell" },
+        ["_"] = { "trim_whitespace", "remove_trailing_lines" },
+      },
+    },
+  },
+  {
     "dense-analysis/ale",
     config = function()
       -- Configuration goes here.
