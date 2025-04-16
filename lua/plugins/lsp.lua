@@ -30,6 +30,7 @@ return {
           reportCallIssue = false,
           -- autostart = false,
         },
+        ruff = {},
         -- basedpyright = {},
       },
       setup = {
@@ -47,11 +48,49 @@ return {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
-        python = { "ruff", "ruff_format" },
+        python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
+        -- python = {},
         rust = { "rustfmt", lsp_format = "fallback" },
         -- ["*"] = { "codespell" },
         ["_"] = { "trim_whitespace", "remove_trailing_lines" },
       },
+      formatters = {
+        ruff_fix = {
+          args = {
+            "check",
+            "--fix",
+            -- "--force-exclude",
+            "--exit-zero",
+            "--no-cache",
+            "--stdin-filename",
+            "$FILENAME",
+            "-",
+          },
+        },
+        ruff_format = {
+          args = {
+            "format",
+            -- "--force-exclude",
+            "--stdin-filename",
+            "$FILENAME",
+            "-",
+          },
+        },
+        ruff_organize_imports = {
+          args = {
+            "check",
+            "--fix",
+            -- "--force-exclude",
+            "--select=I001",
+            "--exit-zero",
+            "--no-cache",
+            "--stdin-filename",
+            "$FILENAME",
+            "-",
+          },
+        },
+      },
+      log_level = vim.log.levels.DEBUG,
     },
   },
   {
@@ -61,8 +100,8 @@ return {
       local g = vim.g
 
       local fixers = {}
-      fixers["*"] = { "remove_trailing_lines", "trim_whitespace" }
-      fixers["python"] = { "ruff", "ruff_format" }
+      fixers["python"] = {}
+      -- fixers["python"] = { "ruff", "ruff_format" }
       g.ale_fixers = fixers
 
       g.ale_linters = {
