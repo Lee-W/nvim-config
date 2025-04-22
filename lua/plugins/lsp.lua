@@ -52,7 +52,7 @@ return {
         -- python = {},
         rust = { "rustfmt", lsp_format = "fallback" },
         -- ["*"] = { "codespell" },
-        ["_"] = { "trim_whitespace", "remove_trailing_lines" },
+        ["_"] = { "trim_whitespace", "trim_newlines" },
       },
       formatters = {
         ruff_fix = {
