@@ -27,13 +27,6 @@ return {
     end,
   },
   {
-    "vim-scripts/vimspell",
-    ft = "txt, md, tex",
-    opts = {
-      spelllang = "en",
-    },
-  },
-  {
     "tomtom/tcomment_vim",
   },
   {
