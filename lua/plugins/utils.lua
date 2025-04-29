@@ -96,6 +96,11 @@ return {
     end,
   },
   { "akinsho/toggleterm.nvim", version = "*", config = true },
+  {
+    "chentoast/marks.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
   -- included in lazyvim (customize behavior)
   {
     -- Highlight, edit, and navigate code
