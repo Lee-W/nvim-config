@@ -44,7 +44,32 @@ return {
       },
     },
   },
+  -- included in lazyvim (customize behavior)
   {
+    -- linting
+    "mfussenegger/nvim-lint",
+    optional = true,
+    opts = {
+      linters = {
+        markdownlint = {
+          args = {
+            "--config",
+            vim.fn.stdpath("config") .. "lua/plugins/config/.markdownlint.json",
+            "--",
+          },
+        },
+        ["markdownlint-cli2"] = {
+          args = {
+            "--config",
+            vim.fn.stdpath("config") .. "lua/plugins/config/.markdownlint.json",
+            "--",
+          },
+        },
+      },
+    },
+  },
+  {
+    -- formatting
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
@@ -92,34 +117,5 @@ return {
       },
       log_level = vim.log.levels.DEBUG,
     },
-  },
-  {
-    "dense-analysis/ale",
-    config = function()
-      -- Configuration goes here.
-      local g = vim.g
-
-      local fixers = {}
-      fixers["python"] = {}
-      -- fixers["python"] = { "ruff", "ruff_format" }
-      g.ale_fixers = fixers
-
-      g.ale_linters = {
-        lua = { "lua_language_server" },
-        python = { "mypy", "bandit", "ruff" },
-        dockerfile = { "hadolint" },
-        yaml = {},
-      }
-      g.ale_fix_on_save = 1
-      g.ale_python_bandit_options = "-iii -lll -s=B322"
-      g.ale_python_mypy_options = "--ignore-missing-imports"
-      g.ale_python_auto_virtualenv = 1
-      g.ale_python_auto_uv = 1
-      g.ale_python_ruff_auto_uv = 1
-      g.ale_python_ruff_format_auto_uv = 1
-      g.ale_yaml_yamllint_options = "-d relaxed"
-      g.ale_open_list = 1
-      g.ale_list_window_size = 6
-    end,
   },
 }
