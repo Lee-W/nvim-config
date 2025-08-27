@@ -31,6 +31,7 @@ return {
           -- autostart = false,
         },
         ruff = {},
+        taplo = {},
         -- basedpyright = {},
       },
       setup = {
@@ -88,9 +89,9 @@ return {
     opts = {
       formatters_by_ft = {
         python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
-        -- python = {},
         rust = { "rustfmt", lsp_format = "fallback" },
-        -- ["*"] = { "codespell" },
+        toml = { "taplo" },
+        ["*"] = { "codespell" },
         ["_"] = { "trim_whitespace", "trim_newlines" },
       },
       formatters = {
