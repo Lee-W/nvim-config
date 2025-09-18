@@ -1,7 +1,7 @@
 return {
   {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason.nvim",
+    "mason-org/mason-lspconfig.nvim",
   },
   {
     -- change nvim-lspconfig options
