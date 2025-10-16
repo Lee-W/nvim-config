@@ -124,12 +124,8 @@ return {
         "markdown",
       },
       highlight = { enable = true },
-      indent = { enable = true, disable = { "python" } },
+      -- indent = { enable = true, disable = { "python" } },
     },
-    config = function(_, opts)
-      -- pcall(require("nvim-treesitter.install").update({ with_sync = true }))
-      require("nvim-treesitter.configs").setup(opts)
-    end,
   },
   {
     "folke/flash.nvim",

@@ -13,7 +13,6 @@ return {
       "mfussenegger/nvim-dap-python", --optional
     },
     ft = "python",
-    branch = "regexp", -- This is the regexp branch, use this for the new version
     keys = {
       { ",v", "<cmd>VenvSelect<cr>" },
     },
