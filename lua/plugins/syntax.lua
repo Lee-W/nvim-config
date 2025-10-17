@@ -27,6 +27,14 @@ return {
     lazy = true,
     enabled = true,
   },
+  -- temporaory fix for an unknown bug
+  {
+    "mfussenegger/nvim-dap",
+    config = function()
+      local dap = require("dap")
+      dap.setup = function() end -- prevent future bad calls
+    end,
+  },
   {
     "Glench/Vim-Jinja2-Syntax",
     ft = { "html", "*.j2", "*.jinja" },
