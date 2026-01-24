@@ -90,7 +90,7 @@ return {
       formatters_by_ft = {
         python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
         rust = { "rustfmt", lsp_format = "fallback" },
-        toml = { "taplo" },
+        -- toml = { "taplo" },
         ["*"] = { "codespell" },
         ["_"] = { "trim_whitespace", "trim_newlines" },
       },
