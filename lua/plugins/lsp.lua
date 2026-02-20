@@ -91,6 +91,7 @@ return {
         python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
         rust = { "rustfmt", lsp_format = "fallback" },
         -- toml = { "taplo" },
+        javascript = { "prettierd", "prettier", stop_after_first = true },
         ["*"] = { "codespell" },
         ["_"] = { "trim_whitespace", "trim_newlines" },
       },
