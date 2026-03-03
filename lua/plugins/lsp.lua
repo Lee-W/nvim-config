@@ -61,6 +61,7 @@ return {
         python = { "mypy", "bandit", "ruff" },
         dockerfile = { "hadolint" },
         yaml = {},
+        ["*"] = { "codespell" },
       }
       -- ale general config
       g.ale_fix_on_save = 1
