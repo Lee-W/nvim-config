@@ -32,6 +32,9 @@ return {
         },
         ruff = {},
         taplo = {},
+        jinja_lsp = {
+          filetypes = { "jinja", "html" },
+        },
         -- basedpyright = {},
       },
       setup = {
