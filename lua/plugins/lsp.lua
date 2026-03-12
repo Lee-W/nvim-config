@@ -97,6 +97,7 @@ return {
         -- toml = { "taplo" },
         markdown = { "rumdl" },
         javascript = { "prettierd", "prettier", stop_after_first = true },
+        css = { "prettier" }, -- Use Prettier for CSS files
         ["*"] = { "codespell" },
         ["_"] = { "trim_whitespace", "trim_newlines" },
       },
