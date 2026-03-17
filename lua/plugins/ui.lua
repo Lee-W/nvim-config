@@ -7,7 +7,7 @@ return {
     -- included in lazyvim (customize behavior)
     "nvim-lualine/lualine.nvim",
     opts = {
-      options = { theme = "catppuccin" },
+      options = { theme = "nightfly" },
       extensions = { "nvim-tree", "fugitive" },
     },
   },
