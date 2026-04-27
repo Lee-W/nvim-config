@@ -41,9 +41,8 @@ map("n", "<C-k>", "<Plug>(ale_previous_wrap)", { silent = true })
 map("n", "<C-j>", "<Plug>(ale_next_wrap)", { silent = true })
 
 ---buffer
-map("n", "gb", ":BufferNext<cr>") ---, { silent = true })
-map("n", "gB", ":BufferPrevious<cr>") ---, { silent = true })
-map("n", "gB", ":BufferPrevious<cr>") ---, { silent = true })
+map("n", "gb", ":bnext<cr>")
+map("n", "gB", ":bprevious<cr>")
 
 ---terminal
 map("t", "<Esc>", "<C-\\><C-n>") ---, { silent = true })

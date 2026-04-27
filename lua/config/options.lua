@@ -15,7 +15,7 @@ opt.hlsearch = true --  highlight search reslt
 opt.incsearch = true --  jump to the matching string when typing
 
 opt.confirm = true
-opt.history = 30 --  keep the latest 30 used commands
+opt.history = 10000
 opt.laststatus = 2 --  always show the statusline
 
 opt.autoindent = true
@@ -40,8 +40,7 @@ opt.wildmenu = true
 opt.wildmode = "full"
 
 -- LSP Server to use for Python.
--- Set to "basedpyright" to use basedpyright instead of pyright.
-vim.g.lazyvim_python_lsp = "pyright"
+vim.g.lazyvim_python_lsp = "basedpyright"
 -- Set to "ruff_lsp" to use the old LSP implementation version.
 vim.g.lazyvim_python_ruff = "ruff"
 

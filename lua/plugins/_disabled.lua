@@ -1,4 +1,46 @@
 return {
+  ---- ui (replaced by lazyvim defaults)
+  {
+    -- replaced by lazyvim's bufferline.nvim
+    "romgrk/barbar.nvim",
+    enabled = false,
+  },
+  {
+    -- replaced by lazyvim's gitsigns.nvim
+    "airblade/vim-gitgutter",
+    enabled = false,
+  },
+  {
+    -- replaced by lazyvim's mini.indentscope
+    "lukas-reineke/indent-blankline.nvim",
+    enabled = false,
+  },
+  {
+    -- replaced by lazyvim's todo-comments.nvim
+    "liangfeng/TaskList.vim",
+    enabled = false,
+  },
+  {
+    -- replaced by treesitter incremental_selection (<C-Space>)
+    "terryma/vim-expand-region",
+    enabled = false,
+  },
+  ---- syntax (covered by treesitter / replaced)
+  {
+    -- pre-treesitter language pack collection
+    "sheerun/vim-polyglot",
+    enabled = false,
+  },
+  {
+    -- covered by treesitter
+    "othree/html5.vim",
+    enabled = false,
+  },
+  {
+    -- replaced by render-markdown.nvim
+    "plasticboy/vim-markdown",
+    enabled = false,
+  },
   ---- utils
   {
     "nvim-pack/nvim-spectre",

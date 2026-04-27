@@ -1,9 +1,5 @@
 return {
   {
-    -- tab line
-    "romgrk/barbar.nvim",
-  },
-  {
     -- included in lazyvim (customize behavior)
     "nvim-lualine/lualine.nvim",
     opts = {

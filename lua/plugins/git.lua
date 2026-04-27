@@ -8,10 +8,6 @@ return {
     "rhysd/conflict-marker.vim",
   },
   {
-    -- git diff markers
-    "airblade/vim-gitgutter",
-  },
-  {
     -- :DiffView.*
     "sindrets/diffview.nvim",
   },

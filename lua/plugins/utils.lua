@@ -3,6 +3,26 @@ return {
     "editorconfig/editorconfig-vim",
   },
   {
+    -- nvim API + plugin types for lua_ls (kills the "Undefined global vim" warnings)
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        { path = "lazy.nvim", words = { "LazyVim" } },
+      },
+    },
+  },
+  {
+    -- project-wide find & replace UI
+    "MagicDuck/grug-far.nvim",
+    cmd = "GrugFar",
+    opts = { headerMaxWidth = 80 },
+    keys = {
+      { "<leader>sR", function() require("grug-far").open() end, desc = "Find & replace (grug-far)" },
+    },
+  },
+  {
     -- Clipboard manager
     "AckslD/nvim-neoclip.lua",
   },
@@ -21,20 +41,10 @@ return {
     },
   },
   {
-    "liangfeng/TaskList.vim",
-    config = function()
-      vim.g.tlTokenList = { "FIXME", "TODO", "XXX" }
-    end,
-  },
-  {
     "tomtom/tcomment_vim",
   },
   {
     "tpope/vim-repeat",
-  },
-  {
-    -- use +/_ to expand/shrink select region
-    "terryma/vim-expand-region",
   },
   {
     "kevinhwang91/nvim-ufo",
@@ -43,18 +53,6 @@ return {
     },
     config = function()
       vim.o.foldcolumn = "0"
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities.textDocument.foldingRange = {
-        dynamicRegistration = false,
-        lineFoldingOnly = true,
-      }
-      local language_servers = vim.lsp.get_clients() -- or list servers manually like {'gopls', 'clangd'}
-      for _, ls in ipairs(language_servers) do
-        require("lspconfig")[ls].setup({
-          capabilities = capabilities,
-          -- you can add other fields for setting up lsp server in this table
-        })
-      end
       local handler = function(virtText, lnum, endLnum, width, truncate)
         local newVirtText = {}
         local suffix = (" 󰁂 %d "):format(endLnum - lnum)
@@ -102,6 +100,11 @@ return {
     opts = {},
   },
   -- included in lazyvim (customize behavior)
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = { max_lines = 3 },
+  },
   {
     -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",

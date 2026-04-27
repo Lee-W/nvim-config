@@ -1,9 +1,4 @@
 return {
-  --------overall
-  {
-    "sheerun/vim-polyglot",
-    enabled = false,
-  },
   --------python
   {
     "linux-cultist/venv-selector.nvim",
@@ -27,23 +22,53 @@ return {
     lazy = true,
     enabled = true,
   },
-  -- temporaory fix for an unknown bug
   {
     "mfussenegger/nvim-dap",
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      "nvim-neotest/nvim-nio",
+      "theHamsta/nvim-dap-virtual-text",
+    },
     config = function()
-      local dap = require("dap")
-      dap.setup = function() end -- prevent future bad calls
+      local dap, dapui = require("dap"), require("dapui")
+      dapui.setup()
+      require("nvim-dap-virtual-text").setup({})
+      dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
+      dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
+      dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
     end,
+    keys = {
+      { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
+      { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Condition: ")) end, desc = "Conditional breakpoint" },
+      { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
+      { "<leader>di", function() require("dap").step_into() end, desc = "Step into" },
+      { "<leader>do", function() require("dap").step_over() end, desc = "Step over" },
+      { "<leader>dO", function() require("dap").step_out() end, desc = "Step out" },
+      { "<leader>dq", function() require("dap").terminate() end, desc = "Terminate" },
+      { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
+      { "<leader>du", function() require("dapui").toggle() end, desc = "Toggle DAP UI" },
+    },
+  },
+  {
+    "mfussenegger/nvim-dap-python",
+    ft = "python",
+    dependencies = { "mfussenegger/nvim-dap" },
+    config = function()
+      local venv = os.getenv("VIRTUAL_ENV")
+      local py = venv and (venv .. "/bin/python") or "python"
+      require("dap-python").setup(py)
+    end,
+    keys = {
+      { "<leader>dt", function() require("dap-python").test_method() end, ft = "python", desc = "Debug test method" },
+      { "<leader>dT", function() require("dap-python").test_class() end, ft = "python", desc = "Debug test class" },
+      { "<leader>ds", function() require("dap-python").debug_selection() end, mode = "v", ft = "python", desc = "Debug selection" },
+    },
   },
   {
     "Glench/Vim-Jinja2-Syntax",
     ft = { "html", "*.j2", "*.jinja" },
   },
   --------Web
-  {
-    "othree/html5.vim",
-    ft = "html",
-  },
   {
     "mattn/emmet-vim",
     ft = { "html", "css" },
@@ -62,14 +87,17 @@ return {
   },
   --------markdown
   {
-    "plasticboy/vim-markdown",
-    ft = "markdown",
-    config = function()
-      vim.g.vim_markdown_folding_disabled = 1
-      vim.g.vim_markdown_conceal = 0
-      vim.g.vim_markdown_conceal_code_blocks = 0
-      vim.g.vim_markdown_toc_autofit = 1
-    end,
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown", "Avante", "copilot-chat" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    opts = {
+      file_types = { "markdown", "Avante", "copilot-chat" },
+      heading = { sign = false },
+      code = { sign = false, width = "block", min_width = 60 },
+    },
   },
   ------rust
   {

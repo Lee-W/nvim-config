@@ -7,42 +7,83 @@ return {
     -- change nvim-lspconfig options
     "neovim/nvim-lspconfig",
     dependencies = {
+      { "b0o/SchemaStore.nvim", version = false },
       {
         "SmiteshP/nvim-navbuddy",
         dependencies = {
           "SmiteshP/nvim-navic",
           "MunifTanjim/nui.nvim",
           "numToStr/Comment.nvim", -- Optional
-          -- "nvim-telescope/telescope.nvim", -- Optional
         },
         event = "VeryLazy",
         cmd = "Navbuddy",
         keys = { { "<F9>", "<CMD>Navbuddy<CR>", desc = "Navbuddy" } },
-        opts = { lsp = { auto_attach = true } },
-        window = { size = "80%" },
+        opts = {
+          lsp = { auto_attach = true },
+          window = { size = "80%" },
+        },
       },
     },
     opts = {
       servers = {
-        pyright = {
-          disableOrganizeImports = true, -- Using Ruff
-          reportMissingImports = false,
-          reportCallIssue = false,
-          -- autostart = false,
+        ["*"] = {
+          capabilities = {
+            textDocument = {
+              foldingRange = {
+                dynamicRegistration = false,
+                lineFoldingOnly = true,
+              },
+            },
+          },
+        },
+        basedpyright = {
+          settings = {
+            basedpyright = {
+              disableOrganizeImports = true, -- Using Ruff
+              analysis = {
+                typeCheckingMode = "off", -- mypy via pre-commit / CI
+                diagnosticMode = "openFilesOnly",
+                useLibraryCodeForTypes = true,
+                autoImportCompletions = true,
+                diagnosticSeverityOverrides = {
+                  reportMissingImports = "none",
+                  reportCallIssue = "none",
+                },
+              },
+            },
+          },
         },
         ruff = {},
         taplo = {},
         jinja_lsp = {
           filetypes = { "jinja", "html" },
         },
-        -- basedpyright = {},
-      },
-      setup = {
-        python = {
-          analysis = {
-            ignore = { "*" }, -- Using Ruff
-            typeCheckingMode = "off", -- Using mypy
-            diagnosticMode = "off",
+        yamlls = {
+          on_new_config = function(config)
+            config.settings.yaml.schemas = vim.tbl_deep_extend(
+              "force",
+              config.settings.yaml.schemas or {},
+              require("schemastore").yaml.schemas()
+            )
+          end,
+          settings = {
+            yaml = {
+              validate = true,
+              schemaStore = { enable = false, url = "" },
+              schemas = {},
+            },
+          },
+        },
+        jsonls = {
+          on_new_config = function(config)
+            config.settings.json.schemas = config.settings.json.schemas or {}
+            vim.list_extend(config.settings.json.schemas, require("schemastore").json.schemas())
+          end,
+          settings = {
+            json = {
+              format = { enable = true },
+              validate = { enable = true },
+            },
           },
         },
       },
@@ -50,6 +91,7 @@ return {
   },
   {
     "dense-analysis/ale",
+    enabled = false,
     config = function()
       -- Configuration goes here.
       local g = vim.g
