@@ -6,6 +6,7 @@ local opt = vim.opt
 
 opt.langmenu = "en_US"
 opt.syntax = "on"
+opt.modeline = false
 
 opt.nu = true --  show line number
 opt.cursorline = true --  show the location of cursor
