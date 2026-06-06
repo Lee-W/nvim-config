@@ -26,10 +26,6 @@ map("n", "<F8>", "<cmd>ToggleTerm<cr>")
 ----toogle AerialToggle[!]
 map("n", "<F10>", "<cmd>AerialToggle<cr>")
 
-----tcomment
-map("n", "`", "<cmd>TComment<cr>")
-map("v", "`", ":TComment<cr>gv")
-
 ---diagnostics
 map("n", "<C-k>", function() vim.diagnostic.jump({ count = -1, float = true }) end, { silent = true })
 map("n", "<C-j>", function() vim.diagnostic.jump({ count = 1, float = true }) end, { silent = true })

@@ -5,32 +5,15 @@
 local opt = vim.opt
 
 opt.langmenu = "en_US"
-opt.syntax = "on"
 opt.modeline = false
-
-opt.nu = true --  show line number
-opt.cursorline = true --  show the location of cursor
 opt.background = "dark"
-opt.ruler = true
-opt.hlsearch = true --  highlight search reslt
-opt.incsearch = true --  jump to the matching string when typing
+opt.laststatus = 2 -- statusline per window (LazyVim defaults to a global one)
 
-opt.confirm = true
-opt.history = 10000
-opt.laststatus = 2 --  always show the statusline
-
-opt.autoindent = true
-opt.cindent = true
-opt.smartindent = true
+-- 4-space indent (LazyVim defaults to 2; expandtab/smartindent come from LazyVim)
 opt.shiftwidth = 4
--- opt.backspace = 2
 opt.tabstop = 4
 opt.softtabstop = 4
 opt.smarttab = true
-opt.expandtab = true --  Convert tab to space, you can use [Ctrl + V + Tab] if tab is needed
-opt.hidden = true
-opt.splitbelow = true
-opt.splitright = true
 
 ---- encoding
 opt.encoding = "utf-8"
