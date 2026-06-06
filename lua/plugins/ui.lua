@@ -3,7 +3,7 @@ return {
     -- included in lazyvim (customize behavior)
     "nvim-lualine/lualine.nvim",
     opts = {
-      options = { theme = "nightfly" },
+      options = { theme = "auto" },
       extensions = { "nvim-tree", "fugitive" },
     },
   },
@@ -19,10 +19,9 @@ return {
           timeout = 1000,
           number = false,
         },
+        -- cursorword handled by illuminate (extras.editor.illuminate)
         cursorword = {
-          enable = true,
-          min_length = 3,
-          hl = { underline = true },
+          enable = false,
         },
       })
     end,

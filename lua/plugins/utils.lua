@@ -23,10 +23,6 @@ return {
     },
   },
   {
-    -- Clipboard manager
-    "AckslD/nvim-neoclip.lua",
-  },
-  {
     -- code outline window
     "stevearc/aerial.nvim",
     opts = {
