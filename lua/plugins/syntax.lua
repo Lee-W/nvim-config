@@ -88,13 +88,13 @@ return {
   --------markdown
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    ft = { "markdown", "Avante", "copilot-chat" },
+    ft = { "markdown" },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
     },
     opts = {
-      file_types = { "markdown", "Avante", "copilot-chat" },
+      file_types = { "markdown" },
       heading = { sign = false },
       code = { sign = false, width = "block", min_width = 60 },
     },

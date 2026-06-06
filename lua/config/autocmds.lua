@@ -17,13 +17,6 @@ vim.api.nvim_create_autocmd("FileType", {
 ----file type specific setting
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "python" },
-  callback = function()
-    vim.opt_local.omnifunc = "python3complete#Complete"
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
   pattern = { "gitcommit" },
   callback = function()
     vim.opt_local.wrap = true
@@ -32,35 +25,25 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- 2-space indent for web/template filetypes
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "html", "*.hbs", "*.handlebars" },
+  pattern = { "html", "htmldjango", "jinja", "handlebars", "javascript", "css" },
   callback = function()
-    vim.opt_local.filetype = "html.jinja"
-    vim.opt_local.ts = 2
-    vim.opt_local.sts = 2
-    vim.opt_local.sw = 2
+    vim.opt_local.tabstop = 2
+    vim.opt_local.softtabstop = 2
+    vim.opt_local.shiftwidth = 2
   end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "html", "javascript" },
+  pattern = { "text" },
   callback = function()
-    vim.opt_local.ts = 2
-    vim.opt_local.sts = 2
-    vim.opt_local.sw = 2
+    vim.opt_local.textwidth = 78
   end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "Dvcfile", "*.dvc", "dvc.lock" },
-  callback = function()
-    vim.setfiletype = "yaml"
-  end,
-})
-
-vim.api.nvim_create_autocmd("BufRead", {
-  pattern = { "*.txt" },
-  callback = function()
-    vim.textwidth = 78
-  end,
+-- DVC files are YAML
+vim.filetype.add({
+  filename = { ["Dvcfile"] = "yaml", ["dvc.lock"] = "yaml" },
+  extension = { dvc = "yaml" },
 })

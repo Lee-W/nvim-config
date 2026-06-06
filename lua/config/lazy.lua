@@ -36,8 +36,6 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.coding.blink" },
     { import = "lazyvim.plugins.extras.coding.luasnip" },
     { import = "lazyvim.plugins.extras.coding.neogen" },
-    -- test
-    { import = "lazyvim.plugins.extras.test.core" },
     -- util
     { import = "lazyvim.plugins.extras.util.gitui" },
     { import = "lazyvim.plugins.extras.util.dot" },

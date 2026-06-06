@@ -17,12 +17,6 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
-----rename
--- map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
-
-----toggl TaskList
-map("n", "<F3>", "<cmd>ToggleTaskList<cr>")
-
 ----toggle spell checking
 map("n", "<F7>", "<cmd>setlocal spell!<cr>")
 
@@ -36,9 +30,9 @@ map("n", "<F10>", "<cmd>AerialToggle<cr>")
 map("n", "`", "<cmd>TComment<cr>")
 map("v", "`", ":TComment<cr>gv")
 
----ale
-map("n", "<C-k>", "<Plug>(ale_previous_wrap)", { silent = true })
-map("n", "<C-j>", "<Plug>(ale_next_wrap)", { silent = true })
+---diagnostics
+map("n", "<C-k>", function() vim.diagnostic.jump({ count = -1, float = true }) end, { silent = true })
+map("n", "<C-j>", function() vim.diagnostic.jump({ count = 1, float = true }) end, { silent = true })
 
 ---buffer
 map("n", "gb", ":bnext<cr>")
