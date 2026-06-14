@@ -4,8 +4,11 @@ return {
     "tpope/vim-fugitive",
   },
   {
-    -- conflict resolver
-    "rhysd/conflict-marker.vim",
+    -- conflict resolver (lua-native: co/ct/cb/c0, ]x/[x to navigate)
+    "akinsho/git-conflict.nvim",
+    version = "*",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {},
   },
   {
     -- :DiffView.*

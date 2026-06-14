@@ -97,7 +97,7 @@ return {
         markdown = { "rumdl" },
         javascript = { "prettierd", "prettier", stop_after_first = true },
         css = { "prettier" }, -- Use Prettier for CSS files
-        ["*"] = { "codespell" },
+        -- codespell removed: auto-"fixes" valid words on save (e.g. ser -> set)
         ["_"] = { "trim_whitespace", "trim_newlines" },
       },
       formatters = {

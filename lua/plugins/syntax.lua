@@ -73,14 +73,6 @@ return {
     ft = { "html", "css" },
   },
   {
-    "othree/yajs.vim",
-    ft = "javascript",
-  },
-  {
-    "othree/javascript-libraries-syntax.vim",
-    ft = "javascript",
-  },
-  {
     "nono/vim-handlebars",
     ft = { "html", "*.hbs", "*.handlebars" },
   },
@@ -97,11 +89,6 @@ return {
       heading = { sign = false },
       code = { sign = false, width = "block", min_width = 60 },
     },
-  },
-  ------rust
-  {
-    "rust-lang/rust.vim",
-    ft = "rust",
   },
   ------just file
   {
