@@ -10,22 +10,7 @@ return {
   {
     "HiPhish/rainbow-delimiters.nvim",
   },
-  {
-    "yamatsum/nvim-cursorline",
-    config = function()
-      require("nvim-cursorline").setup({
-        cursorline = {
-          enable = true,
-          timeout = 1000,
-          number = false,
-        },
-        -- cursorword handled by illuminate (extras.editor.illuminate)
-        cursorword = {
-          enable = false,
-        },
-      })
-    end,
-  },
+  -- cursorline: built-in vim.opt.cursorline (see config/options.lua); cursorword via illuminate
   -- included in lazyvim (customize behavior)
   { "nvim-mini/mini.ai", version = "*", opts = { n_lines = 1000 } },
 }

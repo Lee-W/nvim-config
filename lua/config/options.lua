@@ -8,6 +8,7 @@ opt.langmenu = "en_US"
 opt.modeline = false
 opt.background = "dark"
 opt.laststatus = 2 -- statusline per window (LazyVim defaults to a global one)
+opt.cursorline = true -- highlight current line (replaces nvim-cursorline plugin)
 
 -- 4-space indent (LazyVim defaults to 2; expandtab/smartindent come from LazyVim)
 opt.shiftwidth = 4

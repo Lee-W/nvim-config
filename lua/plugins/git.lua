@@ -1,5 +1,13 @@
 return {
   {
+    -- lazyvim default; add lightweight inline current-line blame
+    "lewis6991/gitsigns.nvim",
+    opts = {
+      current_line_blame = true,
+      current_line_blame_opts = { delay = 500 },
+    },
+  },
+  {
     -- git wrapper
     "tpope/vim-fugitive",
   },
