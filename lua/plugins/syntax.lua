@@ -53,9 +53,12 @@ return {
     ft = "python",
     dependencies = { "mfussenegger/nvim-dap" },
     config = function()
-      local venv = os.getenv("VIRTUAL_ENV")
-      local py = venv and (venv .. "/bin/python") or "python"
-      require("dap-python").setup(py)
+      -- Run the debugpy *adapter* via uv (`uv run --with debugpy ...`) so it always
+      -- has debugpy and isn't pinned to whatever venv was active at startup. The
+      -- debugged program's interpreter is still resolved per session from
+      -- $VIRTUAL_ENV (set by venv-selector), so switching venvs is picked up
+      -- without restarting nvim.
+      require("dap-python").setup("uv")
     end,
     keys = {
       { "<leader>dt", function() require("dap-python").test_method() end, ft = "python", desc = "Debug test method" },

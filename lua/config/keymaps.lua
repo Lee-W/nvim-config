@@ -17,6 +17,9 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
+----find files (snacks picker, unified with lazyvim_picker)
+map("n", "<C-P>", function() require("snacks").picker.files() end)
+
 ----toggle spell checking
 map("n", "<F7>", "<cmd>setlocal spell!<cr>")
 
