@@ -81,6 +81,13 @@ return {
   },
   --------markdown
   {
+    -- LazyVim's default build downloads a pre-built binary that is an unsigned
+    -- arm64 Mach-O; Apple Silicon refuses to spawn it (E903 / errno 88). Build
+    -- from source instead so the preview server runs through node.
+    "iamcco/markdown-preview.nvim",
+    build = "cd app && yarn install",
+  },
+  {
     "MeanderingProgrammer/render-markdown.nvim",
     ft = { "markdown" },
     dependencies = {
