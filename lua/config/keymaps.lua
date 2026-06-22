@@ -6,8 +6,6 @@
 --
 -- This file is automatically loaded by lazyvim.plugins.config
 
-local Util = require("lazyvim.util")
-
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
   ---@cast keys LazyKeysHandler
@@ -26,7 +24,7 @@ map("n", "<F7>", "<cmd>setlocal spell!<cr>")
 ----toggle ToggleTerm
 map("n", "<F8>", "<cmd>ToggleTerm<cr>")
 
-----toogle AerialToggle[!]
+----toggle AerialToggle[!]
 map("n", "<F10>", "<cmd>AerialToggle<cr>")
 
 ----comment via built-in gc (keep the old ` muscle memory)

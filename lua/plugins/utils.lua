@@ -1,8 +1,5 @@
 return {
   {
-    "editorconfig/editorconfig-vim",
-  },
-  {
     -- nvim API + plugin types for lua_ls (kills the "Undefined global vim" warnings)
     "folke/lazydev.nvim",
     ft = "lua",
@@ -80,7 +77,7 @@ return {
     end,
   },
   {
-    -- easier serach
+    -- easier search
     "kevinhwang91/nvim-hlslens",
     config = function()
       require("hlslens").setup()
@@ -101,14 +98,10 @@ return {
   {
     -- Highlight, edit, and navigate code
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-    },
-    opts = {
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
       -- Add languages to be installed here that you want installed for treesitter
-      ensure_installed = {
+      vim.list_extend(opts.ensure_installed, {
         "c",
         "lua",
         "python",
@@ -124,10 +117,9 @@ return {
         "css",
         "jinja",
         "jinja_inline",
-      },
-      highlight = { enable = true },
+      })
       -- indent = { enable = true, disable = { "python" } },
-    },
+    end,
   },
   {
     "folke/flash.nvim",

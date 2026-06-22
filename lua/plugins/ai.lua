@@ -2,7 +2,20 @@ return {
   {
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
-    lazy = false,
+    lazy = true,
+    cmd = {
+      "ClaudeCode",
+      "ClaudeCodeFocus",
+      "ClaudeCodeOpen",
+      "ClaudeCodeClose",
+      "ClaudeCodeStatus",
+      "ClaudeCodeSelectModel",
+      "ClaudeCodeAdd",
+      "ClaudeCodeSend",
+      "ClaudeCodeTreeAdd",
+      "ClaudeCodeDiffAccept",
+      "ClaudeCodeDiffDeny",
+    },
     opts = {
       -- Focus Claude terminal after sending code/selection
       focus_after_send = true,

@@ -21,7 +21,7 @@ A personal Neovim configuration built on [LazyVim](https://github.com/LazyVim/La
 | Git | Plugin manager bootstrap |
 | Node.js | Several LSP servers |
 | Python 3 + `uv` | Python toolchain (ruff, basedpyright) |
-| `fd` / `ripgrep` | fzf-lua file/content search |
+| `fd` / `ripgrep` | File/content search |
 | A [Nerd Font](https://www.nerdfonts.com/) | Icons |
 
 ### Installation
@@ -107,14 +107,15 @@ Key shortcuts (`<leader>a`):
 | neogit | Interactive git TUI |
 | diffview.nvim | Side-by-side diff viewer |
 | blame.nvim | Blame window (`<leader>gB`) and virtual text (`<leader>gV`) |
-| conflict-marker.vim | Conflict resolution helpers |
+| git-conflict.nvim | Conflict resolution helpers |
 | gitsigns.nvim | Gutter signs & hunk operations |
 
 #### Fuzzy Finding & Navigation
 
 | Plugin | Role |
 |--------|------|
-| fzf-lua | File/buffer/grep picker (`<C-P>`) |
+| snacks.nvim | Primary file/buffer/grep picker (`<C-P>`) |
+| fzf-lua | Secondary picker used by integrations |
 | nvim-tree.lua | File explorer (`<F2>`) |
 | aerial.nvim | Code outline (`<F10>`) |
 | flash.nvim | Jump-to-anywhere motions |
@@ -142,7 +143,7 @@ Key shortcuts (`<leader>a`):
 | mini.ai | Extended text objects |
 | yanky.nvim | Yank ring |
 | grug-far.nvim | Find & replace UI (`<leader>sR`) |
-| tcomment_vim | Toggle comment (`` ` ``) |
+| ts-comments.nvim / built-in `gc` | Toggle comment (`` ` ``) |
 
 ### Language Support
 
@@ -163,7 +164,7 @@ Enabled via LazyVim extras:
 | Git | Plugin 管理器自動啟動 |
 | Node.js | 部分 LSP server 依賴 |
 | Python 3 + `uv` | Python 工具鏈（ruff、basedpyright） |
-| `fd` / `ripgrep` | fzf-lua 檔案與內容搜尋 |
+| `fd` / `ripgrep` | 檔案與內容搜尋 |
 | [Nerd Font](https://www.nerdfonts.com/) | 圖示顯示 |
 
 ### 安裝方式
@@ -249,14 +250,15 @@ nvim
 | neogit | 互動式 git TUI |
 | diffview.nvim | 並排 diff 檢視器 |
 | blame.nvim | Blame 視窗（`<leader>gB`）與虛擬文字（`<leader>gV`） |
-| conflict-marker.vim | 衝突解決輔助 |
+| git-conflict.nvim | 衝突解決輔助 |
 | gitsigns.nvim | 行號欄 git 標記與 hunk 操作 |
 
 #### 模糊搜尋與導覽
 
 | Plugin | 用途 |
 |--------|------|
-| fzf-lua | 檔案 / buffer / grep 搜尋（`<C-P>`） |
+| snacks.nvim | 主要檔案 / buffer / grep 搜尋（`<C-P>`） |
+| fzf-lua | integrations 使用的次要 picker |
 | nvim-tree.lua | 檔案總管（`<F2>`） |
 | aerial.nvim | 程式碼大綱（`<F10>`） |
 | flash.nvim | 跳躍動作，按字元標籤定位 |
@@ -284,7 +286,7 @@ nvim
 | mini.ai | 擴充文字物件 |
 | yanky.nvim | 複製歷史環 |
 | grug-far.nvim | 尋找與取代 UI（`<leader>sR`） |
-| tcomment_vim | 切換註解（`` ` ``） |
+| ts-comments.nvim / 內建 `gc` | 切換註解（`` ` ``） |
 
 ### 支援的語言
 
