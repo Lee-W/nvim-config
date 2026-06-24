@@ -86,6 +86,10 @@ return {
     -- from source instead so the preview server runs through node.
     "iamcco/markdown-preview.nvim",
     build = "cd app && yarn install",
+    init = function()
+      -- Widen the preview's content area so wide tables aren't clipped.
+      vim.g.mkdp_markdown_css = vim.fn.stdpath("config") .. "/assets/markdown-preview.css"
+    end,
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",

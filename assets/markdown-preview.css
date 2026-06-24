@@ -1,0 +1,12 @@
+/* Widen markdown-preview.nvim's content area so wide tables aren't clipped. */
+.markdown-body {
+  max-width: none;
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* Let tables use the full width and scroll horizontally if still too wide. */
+.markdown-body table {
+  display: table;
+  width: 100%;
+}
