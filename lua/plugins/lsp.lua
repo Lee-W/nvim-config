@@ -33,6 +33,10 @@ return {
           },
         },
         basedpyright = {
+          -- Installed via `uv tool install basedpyright`, not mason: mason builds a
+          -- venv with the uv-managed standalone python3, whose ensurepip is broken
+          -- ("No module named 'encodings'"), so the mason install fails.
+          mason = false,
           settings = {
             basedpyright = {
               disableOrganizeImports = true, -- Using Ruff
