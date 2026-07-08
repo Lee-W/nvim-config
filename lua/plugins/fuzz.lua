@@ -2,6 +2,7 @@ return {
   {
     -- kept as a dependency for neogit / venv-selector; the primary picker is snacks
     "ibhagwan/fzf-lua",
+    lazy = true,
     -- optional for icon support
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()

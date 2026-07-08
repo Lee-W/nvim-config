@@ -21,19 +21,9 @@ map("n", "<C-P>", function() require("snacks").picker.files() end)
 ----toggle spell checking
 map("n", "<F7>", "<cmd>setlocal spell!<cr>")
 
-----toggle ToggleTerm
-map("n", "<F8>", "<cmd>ToggleTerm<cr>")
-
-----toggle AerialToggle[!]
-map("n", "<F10>", "<cmd>AerialToggle<cr>")
-
-----comment via built-in gc (keep the old ` muscle memory)
+----comment via built-in gc (trades away native `mark jumps for old muscle memory)
 map("n", "`", "gcc", { remap = true })
 map("x", "`", "gcgv", { remap = true })
-
----diagnostics
-map("n", "<C-k>", function() vim.diagnostic.jump({ count = -1, float = true }) end, { silent = true })
-map("n", "<C-j>", function() vim.diagnostic.jump({ count = 1, float = true }) end, { silent = true })
 
 ---buffer
 map("n", "gb", ":bnext<cr>")

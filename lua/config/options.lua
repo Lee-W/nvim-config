@@ -4,7 +4,6 @@
 --
 local opt = vim.opt
 
-opt.langmenu = "en_US"
 opt.modeline = false
 opt.background = "dark"
 opt.laststatus = 2 -- statusline per window (LazyVim defaults to a global one)
@@ -14,15 +13,9 @@ opt.cursorline = true -- highlight current line (replaces nvim-cursorline plugin
 opt.shiftwidth = 4
 opt.tabstop = 4
 opt.softtabstop = 4
-opt.smarttab = true
 
----- encoding
-opt.encoding = "utf-8"
+---- file encoding fallbacks
 opt.fileencodings = { "utf-8", "cp950", "big5" }
-
-----Set up tab autocomplete in ex mode
-opt.wildmenu = true
-opt.wildmode = "full"
 
 -- LSP Server to use for Python.
 vim.g.lazyvim_python_lsp = "basedpyright"

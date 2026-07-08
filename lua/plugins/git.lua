@@ -21,10 +21,20 @@ return {
   {
     -- :DiffView.*
     "sindrets/diffview.nvim",
+    cmd = {
+      "DiffviewClose",
+      "DiffviewFileHistory",
+      "DiffviewFocusFiles",
+      "DiffviewLog",
+      "DiffviewOpen",
+      "DiffviewRefresh",
+      "DiffviewToggleFiles",
+    },
   },
   {
     -- Interactive git interface
     "NeogitOrg/neogit",
+    cmd = { "Neogit" },
     dependencies = {
       "nvim-lua/plenary.nvim", -- required
       "sindrets/diffview.nvim", -- optional - Diff integration

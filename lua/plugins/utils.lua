@@ -22,6 +22,9 @@ return {
   {
     -- code outline window
     "stevearc/aerial.nvim",
+    keys = {
+      { "<F10>", "<cmd>AerialToggle<cr>", desc = "Toggle code outline" },
+    },
     opts = {
       layout = {
         default_direction = "prefer_right",
@@ -83,7 +86,14 @@ return {
       require("hlslens").setup()
     end,
   },
-  { "akinsho/toggleterm.nvim", version = "*", config = true },
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    keys = {
+      { "<F8>", "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
+    },
+    config = true,
+  },
   {
     "chentoast/marks.nvim",
     event = "VeryLazy",
