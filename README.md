@@ -17,7 +17,7 @@ A personal Neovim configuration built on [LazyVim](https://github.com/LazyVim/La
 
 | Tool | Purpose |
 |------|---------|
-| Neovim ≥ 0.10 | Editor runtime |
+| Neovim ≥ 0.11.2 | Editor runtime |
 | Git | Plugin manager bootstrap |
 | Node.js | Several LSP servers |
 | Python 3 + `uv` | Python toolchain (ruff, basedpyright) |
@@ -31,7 +31,7 @@ A personal Neovim configuration built on [LazyVim](https://github.com/LazyVim/La
 mv ~/.config/nvim ~/.config/nvim.bak
 
 # Clone
-git clone https://github.com/<your-username>/nvim-config ~/.config/nvim
+git clone https://github.com/Lee-W/nvim-config.git ~/.config/nvim
 
 # Launch — lazy.nvim bootstraps itself on first run
 nvim
@@ -64,13 +64,13 @@ nvim
 |--------|------|
 | mason.nvim + mason-lspconfig | Language server installer |
 | nvim-lspconfig | LSP client configuration |
-| basedpyright | Python type checking (diagnostics: open files only) |
+| basedpyright | Basic Python type checking (diagnostics: open files only) |
 | ruff | Python linting & formatting |
 | jinja_lsp | Jinja2 template intellisense |
 | yamlls + SchemaStore | YAML with schema validation |
 | jsonls + SchemaStore | JSON with schema validation |
 | taplo | TOML LSP |
-| conform.nvim | Format-on-demand (ruff → rustfmt → prettier → rumdl) |
+| conform.nvim | Automatic formatting on save (Ruff, rustfmt, Prettier, rumdl) |
 | nvim-navbuddy | Symbol navigation UI (`<F9>`) |
 
 #### Python / Airflow Toolchain
@@ -115,7 +115,6 @@ Key shortcuts (`<leader>a`):
 | Plugin | Role |
 |--------|------|
 | snacks.nvim | Primary file/buffer/grep picker (`<C-P>`) |
-| fzf-lua | Secondary picker used by integrations |
 | nvim-tree.lua | File explorer (`<F2>`) |
 | aerial.nvim | Code outline (`<F10>`) |
 | flash.nvim | Jump-to-anywhere motions |
@@ -127,7 +126,7 @@ Key shortcuts (`<leader>a`):
 | catppuccin (mocha) | Color scheme |
 | lualine.nvim | Status line |
 | bufferline.nvim | Buffer tabs |
-| toggleterm.nvim | Terminal toggle (`<F8>`) |
+| snacks.nvim | Project-root terminal (`<F8>` or `<C-/>`) |
 | noice.nvim | Prettier command-line / notifications |
 | nvim-ufo | Code folding with preview |
 | render-markdown.nvim | In-editor Markdown rendering |
@@ -160,7 +159,7 @@ Enabled via LazyVim extras:
 
 | 工具 | 用途 |
 |------|------|
-| Neovim ≥ 0.10 | 編輯器主體 |
+| Neovim ≥ 0.11.2 | 編輯器主體 |
 | Git | Plugin 管理器自動啟動 |
 | Node.js | 部分 LSP server 依賴 |
 | Python 3 + `uv` | Python 工具鏈（ruff、basedpyright） |
@@ -174,7 +173,7 @@ Enabled via LazyVim extras:
 mv ~/.config/nvim ~/.config/nvim.bak
 
 # 下載設定
-git clone https://github.com/<your-username>/nvim-config ~/.config/nvim
+git clone https://github.com/Lee-W/nvim-config.git ~/.config/nvim
 
 # 啟動 Neovim，lazy.nvim 會自動初始化並安裝所有 plugin
 nvim
@@ -207,13 +206,13 @@ nvim
 |--------|------|
 | mason.nvim + mason-lspconfig | Language server 安裝管理器 |
 | nvim-lspconfig | LSP 客戶端設定 |
-| basedpyright | Python 型別檢查（僅開啟中的檔案） |
+| basedpyright | Python 基本型別檢查（僅開啟中的檔案） |
 | ruff | Python lint 與格式化 |
 | jinja_lsp | Jinja2 模板補全 |
 | yamlls + SchemaStore | YAML 含 schema 驗證 |
 | jsonls + SchemaStore | JSON 含 schema 驗證 |
 | taplo | TOML LSP |
-| conform.nvim | 手動格式化（ruff → rustfmt → prettier → rumdl） |
+| conform.nvim | 存檔時自動格式化（Ruff、rustfmt、Prettier、rumdl） |
 | nvim-navbuddy | 符號導覽 UI（`<F9>`） |
 
 #### Python / Airflow 開發工具
@@ -258,7 +257,6 @@ nvim
 | Plugin | 用途 |
 |--------|------|
 | snacks.nvim | 主要檔案 / buffer / grep 搜尋（`<C-P>`） |
-| fzf-lua | integrations 使用的次要 picker |
 | nvim-tree.lua | 檔案總管（`<F2>`） |
 | aerial.nvim | 程式碼大綱（`<F10>`） |
 | flash.nvim | 跳躍動作，按字元標籤定位 |
@@ -270,7 +268,7 @@ nvim
 | catppuccin（mocha） | 色彩主題 |
 | lualine.nvim | 狀態列 |
 | bufferline.nvim | buffer 分頁列 |
-| toggleterm.nvim | 終端機開關（`<F8>`） |
+| snacks.nvim | 專案根目錄終端機（`<F8>` 或 `<C-/>`） |
 | noice.nvim | 命令列與通知美化 |
 | nvim-ufo | 程式碼摺疊與預覽 |
 | render-markdown.nvim | 編輯器內 Markdown 渲染 |

@@ -171,9 +171,7 @@ return {
     config = function()
       vim.api.nvim_create_autocmd("FileType", {
         pattern = { "python" },
-        callback = function()
-          vim.opt_local.completeopt = "preview"
-        end,
+        callback = function() vim.opt_local.completeopt = "preview" end,
       })
     end,
     enabled = false,

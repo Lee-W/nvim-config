@@ -9,9 +9,7 @@
 ----disable expandtab when editing makefile
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "make" },
-  callback = function()
-    vim.opt_local.expandtab = false
-  end,
+  callback = function() vim.opt_local.expandtab = false end,
 })
 
 ----file type specific setting
@@ -27,7 +25,18 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- 2-space indent for web/template filetypes
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "html", "htmldjango", "jinja", "handlebars", "javascript", "css" },
+  pattern = {
+    "html",
+    "htmldjango",
+    "jinja",
+    "handlebars",
+    "handlebars.html",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "css",
+  },
   callback = function()
     vim.opt_local.tabstop = 2
     vim.opt_local.softtabstop = 2
@@ -37,9 +46,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "text" },
-  callback = function()
-    vim.opt_local.textwidth = 78
-  end,
+  callback = function() vim.opt_local.textwidth = 78 end,
 })
 
 -- DVC files are YAML

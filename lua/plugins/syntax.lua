@@ -16,7 +16,7 @@ return {
       enable_cached_venvs = true,
       activate_venv_in_terminal = true,
       notify_user_on_venv_activation = true,
-      picker = "fzf-lua",
+      picker = "snacks",
     },
     lazy = true,
     enabled = true,
@@ -37,15 +37,51 @@ return {
       dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
     end,
     keys = {
-      { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
-      { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Condition: ")) end, desc = "Conditional breakpoint" },
-      { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
-      { "<leader>di", function() require("dap").step_into() end, desc = "Step into" },
-      { "<leader>do", function() require("dap").step_over() end, desc = "Step over" },
-      { "<leader>dO", function() require("dap").step_out() end, desc = "Step out" },
-      { "<leader>dq", function() require("dap").terminate() end, desc = "Terminate" },
-      { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
-      { "<leader>du", function() require("dapui").toggle() end, desc = "Toggle DAP UI" },
+      {
+        "<leader>db",
+        function() require("dap").toggle_breakpoint() end,
+        desc = "Toggle breakpoint",
+      },
+      {
+        "<leader>dB",
+        function() require("dap").set_breakpoint(vim.fn.input("Condition: ")) end,
+        desc = "Conditional breakpoint",
+      },
+      {
+        "<leader>dc",
+        function() require("dap").continue() end,
+        desc = "Continue",
+      },
+      {
+        "<leader>di",
+        function() require("dap").step_into() end,
+        desc = "Step into",
+      },
+      {
+        "<leader>do",
+        function() require("dap").step_over() end,
+        desc = "Step over",
+      },
+      {
+        "<leader>dO",
+        function() require("dap").step_out() end,
+        desc = "Step out",
+      },
+      {
+        "<leader>dq",
+        function() require("dap").terminate() end,
+        desc = "Terminate",
+      },
+      {
+        "<leader>dr",
+        function() require("dap").repl.toggle() end,
+        desc = "Toggle REPL",
+      },
+      {
+        "<leader>du",
+        function() require("dapui").toggle() end,
+        desc = "Toggle DAP UI",
+      },
     },
   },
   {
@@ -61,14 +97,30 @@ return {
       require("dap-python").setup("uv")
     end,
     keys = {
-      { "<leader>dt", function() require("dap-python").test_method() end, ft = "python", desc = "Debug test method" },
-      { "<leader>dT", function() require("dap-python").test_class() end, ft = "python", desc = "Debug test class" },
-      { "<leader>ds", function() require("dap-python").debug_selection() end, mode = "v", ft = "python", desc = "Debug selection" },
+      {
+        "<leader>dt",
+        function() require("dap-python").test_method() end,
+        ft = "python",
+        desc = "Debug test method",
+      },
+      {
+        "<leader>dT",
+        function() require("dap-python").test_class() end,
+        ft = "python",
+        desc = "Debug test class",
+      },
+      {
+        "<leader>ds",
+        function() require("dap-python").debug_selection() end,
+        mode = "v",
+        ft = "python",
+        desc = "Debug selection",
+      },
     },
   },
   {
     "Glench/Vim-Jinja2-Syntax",
-    ft = { "html", "*.j2", "*.jinja" },
+    ft = { "html", "jinja" },
   },
   --------Web
   {
@@ -77,7 +129,7 @@ return {
   },
   {
     "nono/vim-handlebars",
-    ft = { "html", "*.hbs", "*.handlebars" },
+    ft = { "html", "handlebars.html" },
   },
   --------markdown
   {

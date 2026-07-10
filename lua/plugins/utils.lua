@@ -16,7 +16,11 @@ return {
     cmd = "GrugFar",
     opts = { headerMaxWidth = 80 },
     keys = {
-      { "<leader>sR", function() require("grug-far").open() end, desc = "Find & replace (grug-far)" },
+      {
+        "<leader>sR",
+        function() require("grug-far").open() end,
+        desc = "Find & replace (grug-far)",
+      },
     },
   },
   {
@@ -82,17 +86,18 @@ return {
   {
     -- easier search
     "kevinhwang91/nvim-hlslens",
-    config = function()
-      require("hlslens").setup()
-    end,
+    config = function() require("hlslens").setup() end,
   },
   {
-    "akinsho/toggleterm.nvim",
-    version = "*",
+    "folke/snacks.nvim",
     keys = {
-      { "<F8>", "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
+      {
+        "<F8>",
+        function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end,
+        mode = { "n", "t" },
+        desc = "Terminal (Root Dir)",
+      },
     },
-    config = true,
   },
   {
     "chentoast/marks.nvim",

@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  config:
+    runs-on: ubuntu-latest
+    env:
+      XDG_CONFIG_HOME: /tmp/nvim-ci/config
+      XDG_DATA_HOME: /tmp/nvim-ci/data
+      XDG_STATE_HOME: /tmp/nvim-ci/state
+      XDG_CACHE_HOME: /tmp/nvim-ci/cache
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Link Neovim configuration
+        run: |
+          mkdir -p "$XDG_CONFIG_HOME"
+          ln -s "$GITHUB_WORKSPACE" "$XDG_CONFIG_HOME/nvim"
+
+      - name: Install Neovim
+        uses: rhysd/action-setup-vim@v1
+        with:
+          version: v0.11.2
+          neovim: true
+
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Check Lua formatting
+        uses: JohnnyMorganz/stylua-action@v5
+        with:
+          version: v2.5.2
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --check .
+
+      - name: Check Lua syntax
+        run: nvim --clean --headless -l scripts/check_lua.lua
+
+      - name: Install plugins
+        run: nvim --headless "+Lazy! sync" +qa
+
+      - name: Run configuration smoke checks
+        run: nvim --headless "+luafile scripts/check_config.lua" +qa

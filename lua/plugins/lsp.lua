@@ -41,14 +41,11 @@ return {
             basedpyright = {
               disableOrganizeImports = true, -- Using Ruff
               analysis = {
-                typeCheckingMode = "off", -- mypy via pre-commit / CI
+                -- Keep editor feedback lightweight; stricter mypy checks still run in pre-commit / CI.
+                typeCheckingMode = "basic",
                 diagnosticMode = "openFilesOnly",
                 useLibraryCodeForTypes = true,
                 autoImportCompletions = true,
-                diagnosticSeverityOverrides = {
-                  reportMissingImports = "none",
-                  reportCallIssue = "none",
-                },
               },
             },
           },
@@ -60,11 +57,8 @@ return {
         },
         yamlls = {
           on_new_config = function(config)
-            config.settings.yaml.schemas = vim.tbl_deep_extend(
-              "force",
-              config.settings.yaml.schemas or {},
-              require("schemastore").yaml.schemas()
-            )
+            config.settings.yaml.schemas =
+              vim.tbl_deep_extend("force", config.settings.yaml.schemas or {}, require("schemastore").yaml.schemas())
           end,
           settings = {
             yaml = {
@@ -100,6 +94,9 @@ return {
         -- toml = { "taplo" },
         markdown = { "rumdl" },
         javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+        typescript = { "prettierd", "prettier", stop_after_first = true },
+        typescriptreact = { "prettierd", "prettier", stop_after_first = true },
         css = { "prettier" }, -- Use Prettier for CSS files
         -- codespell removed: auto-"fixes" valid words on save (e.g. ser -> set)
         ["_"] = { "trim_whitespace", "trim_newlines" },
