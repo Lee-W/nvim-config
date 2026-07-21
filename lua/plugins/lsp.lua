@@ -37,6 +37,30 @@ return {
           -- venv with the uv-managed standalone python3, whose ensurepip is broken
           -- ("No module named 'encodings'"), so the mason install fails.
           mason = false,
+          -- uv workspaces nest a pyproject.toml under every member (e.g. providers/<name>),
+          -- which shadows the real workspace root under the default root_markers and
+          -- strands basedpyright without the shared .venv (breaks import resolution /
+          -- go-to-definition across packages). uv.lock only exists at actual workspace
+          -- roots -- including isolated sub-workspaces like dev/breeze -- so prefer it.
+          root_dir = function(bufnr, on_dir)
+            local fname = vim.api.nvim_buf_get_name(bufnr)
+            on_dir(
+              vim.fs.root(fname, "uv.lock")
+                or vim.fs.root(
+                  fname,
+                  { "pyrightconfig.json", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
+                )
+            )
+          end,
+          -- Without venvPath/venv or python.pythonPath, basedpyright falls back to
+          -- whatever `python` is on $PATH -- it never auto-detects a .venv folder.
+          -- Point it at this root's own venv (each uv sub-workspace above has one).
+          on_init = function(client)
+            local venv_python = client.root_dir .. "/.venv/bin/python"
+            if vim.uv.fs_stat(venv_python) then
+              client.settings = vim.tbl_deep_extend("force", client.settings or {}, { python = { pythonPath = venv_python } })
+            end
+          end,
           settings = {
             basedpyright = {
               disableOrganizeImports = true, -- Using Ruff
