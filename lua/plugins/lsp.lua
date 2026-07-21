@@ -44,13 +44,15 @@ return {
           -- roots -- including isolated sub-workspaces like dev/breeze -- so prefer it.
           root_dir = function(bufnr, on_dir)
             local fname = vim.api.nvim_buf_get_name(bufnr)
-            on_dir(
-              vim.fs.root(fname, "uv.lock")
-                or vim.fs.root(
-                  fname,
-                  { "pyrightconfig.json", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
-                )
-            )
+            on_dir(vim.fs.root(fname, "uv.lock") or vim.fs.root(fname, {
+              "pyrightconfig.json",
+              "pyproject.toml",
+              "setup.py",
+              "setup.cfg",
+              "requirements.txt",
+              "Pipfile",
+              ".git",
+            }))
           end,
           -- Without venvPath/venv or python.pythonPath, basedpyright falls back to
           -- whatever `python` is on $PATH -- it never auto-detects a .venv folder.
@@ -58,7 +60,8 @@ return {
           on_init = function(client)
             local venv_python = client.root_dir .. "/.venv/bin/python"
             if vim.uv.fs_stat(venv_python) then
-              client.settings = vim.tbl_deep_extend("force", client.settings or {}, { python = { pythonPath = venv_python } })
+              client.settings =
+                vim.tbl_deep_extend("force", client.settings or {}, { python = { pythonPath = venv_python } })
             end
           end,
           settings = {
