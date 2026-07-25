@@ -42,14 +42,22 @@ return {
   },
   {
     "tpope/vim-repeat",
+    event = "VeryLazy",
   },
   {
     "kevinhwang91/nvim-ufo",
     dependencies = {
       "kevinhwang91/promise-async",
     },
+    event = "BufReadPost",
     config = function()
       vim.o.foldcolumn = "0"
+      -- ufo owns folding: keep every fold open on entry and let ufo (not LazyVim's
+      -- native vim.lsp.foldexpr) decide the provider, otherwise the two disagree
+      -- and the virtual fold text drifts out of sync with the real fold state.
+      vim.o.foldlevel = 99
+      vim.o.foldlevelstart = 99
+      vim.o.foldenable = true
       local handler = function(virtText, lnum, endLnum, width, truncate)
         local newVirtText = {}
         local suffix = (" 󰁂 %d "):format(endLnum - lnum)
@@ -80,12 +88,18 @@ return {
 
       require("ufo").setup({
         fold_virt_text_handler = handler,
+        provider_selector = function() return { "lsp", "indent" } end,
       })
+
+      -- Built-in zR/zM only see the folds vim computed; ufo keeps its own state.
+      vim.keymap.set("n", "zR", require("ufo").openAllFolds, { desc = "Open all folds" })
+      vim.keymap.set("n", "zM", require("ufo").closeAllFolds, { desc = "Close all folds" })
     end,
   },
   {
     -- easier search
     "kevinhwang91/nvim-hlslens",
+    event = "VeryLazy",
     config = function() require("hlslens").setup() end,
   },
   {
@@ -99,11 +113,8 @@ return {
       },
     },
   },
-  {
-    "chentoast/marks.nvim",
-    event = "VeryLazy",
-    opts = {},
-  },
+  -- marks.nvim removed: its whole value is ` -prefixed mark navigation, which
+  -- config/keymaps.lua trades away by mapping ` to gcc. Use 'a to jump instead.
   -- included in lazyvim (customize behavior)
   {
     "nvim-treesitter/nvim-treesitter-context",

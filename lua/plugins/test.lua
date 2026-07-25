@@ -9,16 +9,17 @@ return {
       "nvim-neotest/neotest-python",
     },
     ft = "python",
-    config = function()
-      require("neotest").setup({
-        adapters = {
-          require("neotest-python")({
-            dap = { justMyCode = false },
-            runner = "pytest",
-          }),
+    -- `opts`, not `config`: a custom `config` replaces LazyVim's, which is what wires
+    -- up the trouble consumer, quickfix opener, status virtual text and the neotest
+    -- diagnostic namespace. LazyVim resolves adapter names from this table itself.
+    opts = {
+      adapters = {
+        ["neotest-python"] = {
+          dap = { justMyCode = false },
+          runner = "pytest",
         },
-      })
-    end,
+      },
+    },
     keys = {
       {
         "<leader>tr",

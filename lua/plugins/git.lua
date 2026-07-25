@@ -10,6 +10,20 @@ return {
   {
     -- git wrapper
     "tpope/vim-fugitive",
+    cmd = {
+      "G",
+      "Git",
+      "Gbrowse",
+      "Gdiffsplit",
+      "Gedit",
+      "Ggrep",
+      "Gread",
+      "Gvdiffsplit",
+      "Gwrite",
+      "GDelete",
+      "GMove",
+      "GRename",
+    },
   },
   {
     -- conflict resolver (lua-native: co/ct/cb/c0, ]x/[x to navigate)

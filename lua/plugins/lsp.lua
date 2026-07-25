@@ -83,30 +83,26 @@ return {
           filetypes = { "jinja", "html" },
         },
         yamlls = {
-          on_new_config = function(config)
-            config.settings.yaml.schemas =
-              vim.tbl_deep_extend("force", config.settings.yaml.schemas or {}, require("schemastore").yaml.schemas())
+          -- `before_init` is the hook the native vim.lsp.config runner calls; the old
+          -- lspconfig-framework `on_new_config` is never invoked under LazyVim >= 16,
+          -- which silently left yamlls with zero schemas (schemaStore is off below).
+          before_init = function(_, new_config)
+            new_config.settings.yaml.schemas = vim.tbl_deep_extend(
+              "force",
+              new_config.settings.yaml.schemas or {},
+              require("schemastore").yaml.schemas()
+            )
           end,
           settings = {
             yaml = {
               validate = true,
+              -- SchemaStore.nvim ships the catalog locally; no need to fetch it.
               schemaStore = { enable = false, url = "" },
               schemas = {},
             },
           },
         },
-        jsonls = {
-          on_new_config = function(config)
-            config.settings.json.schemas = config.settings.json.schemas or {}
-            vim.list_extend(config.settings.json.schemas, require("schemastore").json.schemas())
-          end,
-          settings = {
-            json = {
-              format = { enable = true },
-              validate = { enable = true },
-            },
-          },
-        },
+        -- jsonls: SchemaStore wiring comes from lazyvim.plugins.extras.lang.json
       },
     },
   },

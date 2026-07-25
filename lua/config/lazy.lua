@@ -55,7 +55,9 @@ require("lazy").setup({
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
   install = { colorscheme = { "tokyonight", "habamax" } },
-  checker = { enabled = true, notify = false }, -- check for updates quietly
+  -- No background update polling: with version=false every check nudges 89 plugins
+  -- toward HEAD. Update deliberately with :Lazy update instead, after a cool-down.
+  checker = { enabled = false },
   performance = {
     rtp = {
       -- disable some rtp plugins

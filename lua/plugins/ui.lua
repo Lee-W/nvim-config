@@ -9,6 +9,7 @@ return {
   },
   {
     "HiPhish/rainbow-delimiters.nvim",
+    event = { "BufReadPost", "BufNewFile" },
   },
   -- cursorline: built-in vim.opt.cursorline (see config/options.lua); cursorword via illuminate
   -- included in lazyvim (customize behavior)
