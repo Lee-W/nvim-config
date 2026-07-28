@@ -18,12 +18,8 @@ end
 ----find files (snacks picker, unified with lazyvim_picker)
 map("n", "<C-P>", function() require("snacks").picker.files() end)
 
-----toggle spell checking
-map("n", "<F7>", "<cmd>setlocal spell!<cr>")
-
-----comment via built-in gc (trades away native `mark jumps for old muscle memory)
-map("n", "`", "gcc", { remap = true })
-map("x", "`", "gcgv", { remap = true })
+-- spell toggle: LazyVim core already binds <leader>us
+-- comments: use built-in gc/gcc; ` is back to native mark jumps
 
 ---buffer
 map("n", "gb", ":bnext<cr>")

@@ -38,7 +38,7 @@ return {
       })
     end,
     keys = {
-      { "<F2>", "<cmd>NvimTreeToggle<cr>" },
+      { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Explorer NvimTree" },
     },
     enabled = true,
   },

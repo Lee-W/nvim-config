@@ -27,7 +27,7 @@ return {
     -- code outline window
     "stevearc/aerial.nvim",
     keys = {
-      { "<F10>", "<cmd>AerialToggle<cr>", desc = "Toggle code outline" },
+      { "<leader>cs", "<cmd>AerialToggle<cr>", desc = "Aerial (Symbols)" },
     },
     opts = {
       layout = {
@@ -102,19 +102,10 @@ return {
     event = "VeryLazy",
     config = function() require("hlslens").setup() end,
   },
-  {
-    "folke/snacks.nvim",
-    keys = {
-      {
-        "<F8>",
-        function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end,
-        mode = { "n", "t" },
-        desc = "Terminal (Root Dir)",
-      },
-    },
-  },
-  -- marks.nvim removed: its whole value is ` -prefixed mark navigation, which
-  -- config/keymaps.lua trades away by mapping ` to gcc. Use 'a to jump instead.
+  -- terminal: dropped in favour of LazyVim core's <leader>ft, which runs the
+  -- identical Snacks.terminal(nil, { cwd = LazyVim.root() }) call.
+  -- marks.nvim still absent, but ` is native again now that the gcc mapping is
+  -- gone -- so ` and 'a both jump to marks. Re-add the plugin if you want more.
   -- included in lazyvim (customize behavior)
   {
     "nvim-treesitter/nvim-treesitter-context",

@@ -13,7 +13,7 @@ return {
         },
         event = "VeryLazy",
         cmd = "Navbuddy",
-        keys = { { "<F9>", "<CMD>Navbuddy<CR>", desc = "Navbuddy" } },
+        keys = { { "<leader>cn", "<CMD>Navbuddy<CR>", desc = "Navbuddy" } },
         opts = {
           lsp = { auto_attach = true },
           window = { size = "80%" },
