@@ -47,6 +47,9 @@ nvim
 | `<F9>` | Symbol navigation (Navbuddy) |
 | `<F10>` | Code outline (Aerial) |
 | `<C-P>` | Fuzzy file search |
+| `<leader>/` | Search text across the project |
+| `<leader>sr` | Search and replace across files (Grug Far) |
+| `<leader>sR` | Resume the last Snacks picker |
 | `` ` `` | Toggle comment |
 | `,v` | Python venv selector |
 | `gb` / `gB` | Next / previous buffer |
@@ -55,6 +58,40 @@ nvim
 | `<leader>tr` | Run nearest test |
 | `<leader>tf` | Run test file |
 | `<leader>td` | Debug nearest test |
+
+### Project-wide Search
+
+`<leader>` is `Space`. For everyday searching, use Snacks:
+
+1. Press `<Space>/`.
+2. Type the text to search for.
+3. Select a result with `<C-N>` / `<C-P>` and press `<Enter>` to open it.
+
+Append ripgrep options after ` -- ` to limit the files being searched (do not
+quote the glob):
+
+```text
+windowCreationCommand -- -g=*.lua
+useEffect -- -g=*.{ts,tsx}
+TODO -- -g=!**/tests/**
+```
+
+Inside the picker, `<A-R>` toggles regular expressions, `<A-H>` includes hidden
+files, and `<C-Q>` sends the results to the quickfix list.
+
+Use `<Space>sr` only when a persistent search panel or cross-file replacement is
+needed. Grug Far opens in a full-page tab and has these inputs:
+
+- `Search`: text or regular expression to find.
+- `Replacement`: replacement text; leave it empty for search only.
+- `Files Filter`: file glob such as `*.lua` or `*.{ts,tsx}`. LazyVim initially
+  fills this with the current file's extension; delete it to search all files.
+- `Flags`: additional ripgrep flags such as `-i` or `-w`.
+- `Paths`: directory to search, such as `lua/`.
+
+Press `<Esc>` to run the search, `<Tab>` / `<S-Tab>` in normal mode to move
+between inputs, and `<Enter>` on a result to open it. Press `\c` to close the
+panel. If replacement text is present, `\r` applies the replacement.
 
 ### Plugin Overview
 
@@ -141,7 +178,7 @@ Key shortcuts (`<leader>a`):
 | mini.surround | Surround text objects |
 | mini.ai | Extended text objects |
 | yanky.nvim | Yank ring |
-| grug-far.nvim | Find & replace UI (`<leader>sR`) |
+| grug-far.nvim | Find & replace UI (`<leader>sr`) |
 | ts-comments.nvim / built-in `gc` | Toggle comment (`` ` ``) |
 
 ### Language Support
@@ -189,6 +226,9 @@ nvim
 | `<F9>` | 符號導覽（Navbuddy） |
 | `<F10>` | 程式碼大綱（Aerial） |
 | `<C-P>` | 模糊搜尋檔案 |
+| `<leader>/` | 搜尋整個專案的文字 |
+| `<leader>sr` | 跨檔搜尋與取代（Grug Far） |
+| `<leader>sR` | 繼續上一次 Snacks picker |
 | `` ` `` | 切換註解 |
 | `,v` | Python 虛擬環境選擇器 |
 | `gb` / `gB` | 下一個 / 上一個 buffer |
@@ -197,6 +237,39 @@ nvim
 | `<leader>tr` | 執行最近的測試 |
 | `<leader>tf` | 執行整個測試檔案 |
 | `<leader>td` | 除錯最近的測試 |
+
+### 專案全文搜尋
+
+`<leader>` 是空白鍵。平常搜尋請使用 Snacks：
+
+1. 按 `<Space>/`。
+2. 輸入要搜尋的文字。
+3. 用 `<C-N>` / `<C-P>` 選擇結果，再按 `<Enter>` 開啟。
+
+若要限制搜尋的檔案，請在 ` -- ` 後面附加 ripgrep 選項（glob 不要加引號）：
+
+```text
+windowCreationCommand -- -g=*.lua
+useEffect -- -g=*.{ts,tsx}
+TODO -- -g=!**/tests/**
+```
+
+在 picker 裡，`<A-R>` 可切換正規表示式、`<A-H>` 可包含隱藏檔，`<C-Q>`
+則會把結果送到 quickfix list。
+
+只有需要保留搜尋面板或進行跨檔取代時，才使用 `<Space>sr`。Grug Far 會在
+獨立的全頁 tab 開啟，欄位用途如下：
+
+- `Search`：要尋找的文字或正規表示式。
+- `Replacement`：取代文字；只搜尋時留白。
+- `Files Filter`：檔案 glob，例如 `*.lua` 或 `*.{ts,tsx}`。LazyVim 一開始會
+  自動填入目前檔案的副檔名；刪除即可搜尋所有檔案。
+- `Flags`：額外的 ripgrep 選項，例如 `-i` 或 `-w`。
+- `Paths`：搜尋目錄，例如 `lua/`。
+
+按 `<Esc>` 執行搜尋；在 normal mode 用 `<Tab>` / `<S-Tab>` 切換欄位；移到
+搜尋結果後按 `<Enter>` 開啟。按 `\c` 關閉面板；有填取代文字時，按 `\r`
+執行取代。
 
 ### Plugin 說明
 
@@ -283,7 +356,7 @@ nvim
 | mini.surround | 包圍文字操作 |
 | mini.ai | 擴充文字物件 |
 | yanky.nvim | 複製歷史環 |
-| grug-far.nvim | 尋找與取代 UI（`<leader>sR`） |
+| grug-far.nvim | 尋找與取代 UI（`<leader>sr`） |
 | ts-comments.nvim / 內建 `gc` | 切換註解（`` ` ``） |
 
 ### 支援的語言

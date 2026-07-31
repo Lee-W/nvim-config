@@ -14,13 +14,11 @@ return {
     -- project-wide find & replace UI
     "MagicDuck/grug-far.nvim",
     cmd = "GrugFar",
-    opts = { headerMaxWidth = 80 },
-    keys = {
-      {
-        "<leader>sR",
-        function() require("grug-far").open() end,
-        desc = "Find & replace (grug-far)",
-      },
+    opts = {
+      headerMaxWidth = 80,
+      windowCreationCommand = "tab split",
+      normalModeSearch = true,
+      maxSearchMatches = 1000,
     },
   },
   {
