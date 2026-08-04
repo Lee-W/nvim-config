@@ -41,11 +41,11 @@ nvim
 
 | Key | Action |
 |-----|--------|
-| `<F2>` | File explorer toggle |
-| `<F7>` | Spell check toggle |
-| `<F8>` | Terminal toggle |
-| `<F9>` | Symbol navigation (Navbuddy) |
-| `<F10>` | Code outline (Aerial) |
+| `<leader>e` | File explorer toggle |
+| `<leader>us` | Spell check toggle |
+| `<leader>ft` / `<C-/>` | Terminal toggle |
+| `<leader>cn` | Symbol navigation (Navbuddy) |
+| `<leader>cs` | Code outline (Aerial) |
 | `<C-P>` | Fuzzy file search |
 | `<leader>/` | Search text across the project |
 | `<leader>sr` | Search and replace across files (Grug Far) |
@@ -108,7 +108,7 @@ panel. If replacement text is present, `\r` applies the replacement.
 | jsonls + SchemaStore | JSON with schema validation |
 | taplo | TOML LSP |
 | conform.nvim | Automatic formatting on save (Ruff, rustfmt, Prettier, rumdl) |
-| nvim-navbuddy | Symbol navigation UI (`<F9>`) |
+| nvim-navbuddy | Symbol navigation UI (`<leader>cn`) |
 
 #### Python / Airflow Toolchain
 
@@ -152,8 +152,8 @@ Key shortcuts (`<leader>a`):
 | Plugin | Role |
 |--------|------|
 | snacks.nvim | Primary file/buffer/grep picker (`<C-P>`) |
-| nvim-tree.lua | File explorer (`<F2>`) |
-| aerial.nvim | Code outline (`<F10>`) |
+| nvim-tree.lua | File explorer (`<leader>e`) |
+| aerial.nvim | Code outline (`<leader>cs`) |
 | flash.nvim | Jump-to-anywhere motions |
 
 #### UI
@@ -163,7 +163,7 @@ Key shortcuts (`<leader>a`):
 | catppuccin (mocha) | Color scheme |
 | lualine.nvim | Status line |
 | bufferline.nvim | Buffer tabs |
-| snacks.nvim | Project-root terminal (`<F8>` or `<C-/>`) |
+| snacks.nvim | Project-root terminal (`<leader>ft` or `<C-/>`) |
 | noice.nvim | Prettier command-line / notifications |
 | nvim-ufo | Code folding with preview |
 | render-markdown.nvim | In-editor Markdown rendering |
@@ -220,11 +220,11 @@ nvim
 
 | 按鍵 | 功能 |
 |------|------|
-| `<F2>` | 開關檔案總管 |
-| `<F7>` | 開關拼字檢查 |
-| `<F8>` | 開關終端機 |
-| `<F9>` | 符號導覽（Navbuddy） |
-| `<F10>` | 程式碼大綱（Aerial） |
+| `<leader>e` | 開關檔案總管 |
+| `<leader>us` | 開關拼字檢查 |
+| `<leader>ft` / `<C-/>` | 開關終端機 |
+| `<leader>cn` | 符號導覽（Navbuddy） |
+| `<leader>cs` | 程式碼大綱（Aerial） |
 | `<C-P>` | 模糊搜尋檔案 |
 | `<leader>/` | 搜尋整個專案的文字 |
 | `<leader>sr` | 跨檔搜尋與取代（Grug Far） |
@@ -286,7 +286,7 @@ TODO -- -g=!**/tests/**
 | jsonls + SchemaStore | JSON 含 schema 驗證 |
 | taplo | TOML LSP |
 | conform.nvim | 存檔時自動格式化（Ruff、rustfmt、Prettier、rumdl） |
-| nvim-navbuddy | 符號導覽 UI（`<F9>`） |
+| nvim-navbuddy | 符號導覽 UI（`<leader>cn`） |
 
 #### Python / Airflow 開發工具
 
@@ -330,8 +330,8 @@ TODO -- -g=!**/tests/**
 | Plugin | 用途 |
 |--------|------|
 | snacks.nvim | 主要檔案 / buffer / grep 搜尋（`<C-P>`） |
-| nvim-tree.lua | 檔案總管（`<F2>`） |
-| aerial.nvim | 程式碼大綱（`<F10>`） |
+| nvim-tree.lua | 檔案總管（`<leader>e`） |
+| aerial.nvim | 程式碼大綱（`<leader>cs`） |
 | flash.nvim | 跳躍動作，按字元標籤定位 |
 
 #### 介面
@@ -341,7 +341,7 @@ TODO -- -g=!**/tests/**
 | catppuccin（mocha） | 色彩主題 |
 | lualine.nvim | 狀態列 |
 | bufferline.nvim | buffer 分頁列 |
-| snacks.nvim | 專案根目錄終端機（`<F8>` 或 `<C-/>`） |
+| snacks.nvim | 專案根目錄終端機（`<leader>ft` 或 `<C-/>`） |
 | noice.nvim | 命令列與通知美化 |
 | nvim-ufo | 程式碼摺疊與預覽 |
 | render-markdown.nvim | 編輯器內 Markdown 渲染 |
