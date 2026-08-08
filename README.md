@@ -162,6 +162,7 @@ Key shortcuts (`<leader>a`):
 |--------|------|
 | catppuccin (mocha) | Color scheme |
 | lualine.nvim | Status line |
+| ring.nvim | RiNG waiting-session count in the status line |
 | bufferline.nvim | Buffer tabs |
 | snacks.nvim | Project-root terminal (`<leader>ft` or `<C-/>`) |
 | noice.nvim | Prettier command-line / notifications |
@@ -340,6 +341,7 @@ TODO -- -g=!**/tests/**
 |--------|------|
 | catppuccin（mocha） | 色彩主題 |
 | lualine.nvim | 狀態列 |
+| ring.nvim | 在狀態列顯示等待回應的 RiNG session 數量 |
 | bufferline.nvim | buffer 分頁列 |
 | snacks.nvim | 專案根目錄終端機（`<leader>ft` 或 `<C-/>`） |
 | noice.nvim | 命令列與通知美化 |

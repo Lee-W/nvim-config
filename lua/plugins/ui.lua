@@ -1,11 +1,16 @@
 return {
   {
+    "Lee-W/ring.nvim",
+    opts = {},
+  },
+  {
     -- included in lazyvim (customize behavior)
     "nvim-lualine/lualine.nvim",
-    opts = {
-      options = { theme = "auto" },
-      extensions = { "nvim-tree", "fugitive" },
-    },
+    opts = function(_, opts)
+      opts.options.theme = "auto"
+      vim.list_extend(opts.extensions, { "nvim-tree", "fugitive" })
+      table.insert(opts.sections.lualine_x, 1, "ring")
+    end,
   },
   {
     "HiPhish/rainbow-delimiters.nvim",
