@@ -6,7 +6,7 @@ local opt = vim.opt
 
 opt.modeline = false
 opt.background = "dark"
-opt.laststatus = 2 -- statusline per window (LazyVim defaults to a global one)
+opt.laststatus = 3 -- single global statusline keeps split-heavy views uncluttered
 opt.cursorline = true -- highlight current line (replaces nvim-cursorline plugin)
 
 -- 4-space indent (LazyVim defaults to 2; expandtab/smartindent come from LazyVim)

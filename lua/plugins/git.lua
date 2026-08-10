@@ -44,6 +44,51 @@ return {
       "DiffviewRefresh",
       "DiffviewToggleFiles",
     },
+    opts = {
+      enhanced_diff_hl = true,
+      show_help_hints = false,
+      view = {
+        default = {
+          disable_diagnostics = true,
+        },
+        file_history = {
+          disable_diagnostics = true,
+        },
+      },
+      file_panel = {
+        win_config = {
+          position = "left",
+          width = 28,
+          win_opts = {
+            number = false,
+            relativenumber = false,
+            signcolumn = "no",
+          },
+        },
+      },
+      file_history_panel = {
+        win_config = {
+          position = "bottom",
+          height = 10,
+          win_opts = {
+            number = false,
+            relativenumber = false,
+            signcolumn = "no",
+          },
+        },
+      },
+      hooks = {
+        diff_buf_win_enter = function()
+          vim.opt_local.list = false
+          vim.opt_local.wrap = false
+          vim.opt_local.relativenumber = false
+          vim.opt_local.signcolumn = "no"
+          vim.opt_local.foldcolumn = "0"
+          vim.opt_local.statuscolumn = ""
+          vim.opt_local.colorcolumn = ""
+        end,
+      },
+    },
   },
   {
     -- Interactive git interface

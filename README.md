@@ -147,6 +147,18 @@ Key shortcuts (`<leader>a`):
 | git-conflict.nvim | Conflict resolution helpers |
 | gitsigns.nvim | Gutter signs & hunk operations |
 
+Diffview workflow:
+
+| Key / command | Action |
+|---------------|--------|
+| `:DiffviewOpen` | Review working-tree changes |
+| `<leader>b` / `:DiffviewToggleFiles` | Hide or show the file panel |
+| `<leader>e` | Show and focus the file panel |
+| `<Tab>` / `<S-Tab>` | Open the next / previous changed file |
+| `]c` / `[c` | Jump to the next / previous diff |
+| `g<C-x>` | Cycle diff layouts |
+| `:DiffviewClose` | Close Diffview |
+
 #### Fuzzy Finding & Navigation
 
 | Plugin | Role |
@@ -325,6 +337,18 @@ TODO -- -g=!**/tests/**
 | blame.nvim | Blame 視窗（`<leader>gB`）與虛擬文字（`<leader>gV`） |
 | git-conflict.nvim | 衝突解決輔助 |
 | gitsigns.nvim | 行號欄 git 標記與 hunk 操作 |
+
+Diffview 操作：
+
+| 按鍵／命令 | 功能 |
+|------------|------|
+| `:DiffviewOpen` | 審閱工作目錄的變更 |
+| `<leader>b`／`:DiffviewToggleFiles` | 隱藏或顯示檔案面板 |
+| `<leader>e` | 顯示檔案面板並將焦點移入 |
+| `<Tab>`／`<S-Tab>` | 開啟下一個／上一個變更檔案 |
+| `]c`／`[c` | 跳到下一個／上一個 diff |
+| `g<C-x>` | 循環切換 diff 版面 |
+| `:DiffviewClose` | 關閉 Diffview |
 
 #### 模糊搜尋與導覽
 
