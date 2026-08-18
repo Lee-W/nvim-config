@@ -1,14 +1,17 @@
--- Review the whole branch against wherever it forked from the remote default
--- branch. origin/HEAD is unset in plenty of clones, so fall back before giving up.
+-- Review the whole branch against wherever it forked from. In a fork workflow
+-- origin is your own fork, so upstream is the honest baseline; fall further back
+-- because plenty of clones never resolve a remote HEAD.
 local function diffview_branch()
   local function exists(ref) return vim.system({ "git", "rev-parse", "--verify", "--quiet", ref }):wait().code == 0 end
-  for _, ref in ipairs({ "origin/HEAD", "origin/main", "origin/master" }) do
+  -- --imply-local points the HEAD side at the real files rather than blobs read
+  -- out of git, which keeps LSP working and lets fixes happen in the diff itself
+  for _, ref in ipairs({ "upstream/HEAD", "origin/HEAD", "origin/main", "origin/master" }) do
     if exists(ref) then
-      return vim.cmd("DiffviewOpen " .. ref .. "...HEAD")
+      return vim.cmd("DiffviewOpen " .. ref .. "...HEAD --imply-local")
     end
   end
-  vim.notify("Diffview: no remote default branch, diffing against HEAD~1", vim.log.levels.WARN)
-  vim.cmd("DiffviewOpen HEAD~1...HEAD")
+  vim.notify("Diffview: no remote base found, diffing against HEAD~1", vim.log.levels.WARN)
+  vim.cmd("DiffviewOpen HEAD~1...HEAD --imply-local")
 end
 
 return {
@@ -84,7 +87,7 @@ return {
     },
     keys = {
       { "<leader>gvv", "<cmd>DiffviewOpen<cr>", desc = "Diffview (working tree)" },
-      { "<leader>gvb", diffview_branch, desc = "Diffview (branch vs remote base)" },
+      { "<leader>gvb", diffview_branch, desc = "Diffview (branch vs upstream/origin)" },
       { "<leader>gvf", "<cmd>DiffviewFileHistory %<cr>", desc = "File History (current file)" },
       { "<leader>gvF", "<cmd>DiffviewFileHistory<cr>", desc = "File History (repo)" },
       { "<leader>gvq", "<cmd>DiffviewClose<cr>", desc = "Diffview Close" },
