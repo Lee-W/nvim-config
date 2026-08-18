@@ -103,8 +103,8 @@ return {
       hooks = {
         diff_buf_win_enter = function(bufnr, winid)
           vim.opt_local.list = false
-          vim.opt_local.wrap = false
-          vim.opt_local.linebreak = true -- so toggled-on wrap breaks at word boundaries
+          vim.opt_local.wrap = true
+          vim.opt_local.linebreak = true -- break at word boundaries, not mid-token
           vim.opt_local.breakindent = true
           vim.opt_local.relativenumber = false
           vim.opt_local.signcolumn = "no"
