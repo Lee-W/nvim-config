@@ -1,3 +1,16 @@
+-- Review the whole branch against wherever it forked from the remote default
+-- branch. origin/HEAD is unset in plenty of clones, so fall back before giving up.
+local function diffview_branch()
+  local function exists(ref) return vim.system({ "git", "rev-parse", "--verify", "--quiet", ref }):wait().code == 0 end
+  for _, ref in ipairs({ "origin/HEAD", "origin/main", "origin/master" }) do
+    if exists(ref) then
+      return vim.cmd("DiffviewOpen " .. ref .. "...HEAD")
+    end
+  end
+  vim.notify("Diffview: no remote default branch, diffing against HEAD~1", vim.log.levels.WARN)
+  vim.cmd("DiffviewOpen HEAD~1...HEAD")
+end
+
 return {
   {
     -- lazyvim default; add lightweight inline current-line blame
@@ -43,6 +56,13 @@ return {
       "DiffviewOpen",
       "DiffviewRefresh",
       "DiffviewToggleFiles",
+    },
+    keys = {
+      { "<leader>gvv", "<cmd>DiffviewOpen<cr>", desc = "Diffview (working tree)" },
+      { "<leader>gvb", diffview_branch, desc = "Diffview (branch vs remote base)" },
+      { "<leader>gvf", "<cmd>DiffviewFileHistory %<cr>", desc = "File History (current file)" },
+      { "<leader>gvF", "<cmd>DiffviewFileHistory<cr>", desc = "File History (repo)" },
+      { "<leader>gvq", "<cmd>DiffviewClose<cr>", desc = "Diffview Close" },
     },
     opts = {
       enhanced_diff_hl = true,
@@ -129,6 +149,15 @@ return {
       merge_consecutive = false,
       max_summary_width = 30,
       commit_detail_view = "split",
+    },
+  },
+  {
+    -- label the <leader>gv prefix; opts_extend keeps LazyVim's own groups
+    "folke/which-key.nvim",
+    opts = {
+      spec = {
+        { "<leader>gv", group = "diffview" },
+      },
     },
   },
 }
