@@ -49,9 +49,12 @@ return {
       show_help_hints = false,
       view = {
         default = {
+          -- stacked, so each side keeps the full window width for long lines
+          layout = "diff2_vertical",
           disable_diagnostics = true,
         },
         file_history = {
+          layout = "diff2_vertical",
           disable_diagnostics = true,
         },
       },
@@ -78,14 +81,27 @@ return {
         },
       },
       hooks = {
-        diff_buf_win_enter = function()
+        diff_buf_win_enter = function(bufnr, winid)
           vim.opt_local.list = false
           vim.opt_local.wrap = false
+          vim.opt_local.linebreak = true -- so toggled-on wrap breaks at word boundaries
+          vim.opt_local.breakindent = true
           vim.opt_local.relativenumber = false
           vim.opt_local.signcolumn = "no"
           vim.opt_local.foldcolumn = "0"
           vim.opt_local.statuscolumn = ""
           vim.opt_local.colorcolumn = ""
+
+          -- side-by-side halves the width, so long lines get cut off; toggle wrap
+          -- on both sides at once, since wrapping one side alone breaks alignment
+          vim.keymap.set("n", "gw", function()
+            local wrap = not vim.wo[winid].wrap
+            for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+              if vim.wo[win].diff then
+                vim.wo[win].wrap = wrap
+              end
+            end
+          end, { buffer = bufnr, desc = "Toggle wrap (all diff windows)" })
         end,
       },
     },
