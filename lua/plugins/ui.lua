@@ -1,7 +1,8 @@
 return {
   {
     "Lee-W/ring.nvim",
-    opts = {},
+    -- notify: a count in the corner is easy to miss while typing
+    opts = { notify = true },
   },
   {
     -- included in lazyvim (customize behavior)
