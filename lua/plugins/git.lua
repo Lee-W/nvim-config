@@ -15,10 +15,35 @@ return {
   {
     -- lazyvim default; add lightweight inline current-line blame
     "lewis6991/gitsigns.nvim",
-    opts = {
-      current_line_blame = true,
-      current_line_blame_opts = { delay = 500 },
-    },
+    opts = function(_, opts)
+      opts.current_line_blame = true
+      opts.current_line_blame_opts = { delay = 500 }
+
+      -- ]c / [c are Vim's diff-mode motions and do nothing outside a diff
+      -- window; fall back to gitsigns hunks there so one key means "next
+      -- change" everywhere. Wrap rather than replace LazyVim's on_attach,
+      -- which owns ]h, [h and the whole <leader>gh group.
+      local lazyvim_on_attach = opts.on_attach
+      opts.on_attach = function(buffer)
+        if lazyvim_on_attach then
+          lazyvim_on_attach(buffer)
+        end
+
+        local function map(lhs, direction, desc)
+          vim.keymap.set("n", lhs, function()
+            if vim.wo.diff then
+              -- bang skips mappings; without it this recurses into itself
+              vim.cmd.normal({ lhs, bang = true })
+            else
+              package.loaded.gitsigns.nav_hunk(direction)
+            end
+          end, { buffer = buffer, desc = desc, silent = true })
+        end
+
+        map("]c", "next", "Next Change")
+        map("[c", "prev", "Prev Change")
+      end
+    end,
   },
   {
     -- git wrapper
