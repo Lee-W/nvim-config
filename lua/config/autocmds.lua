@@ -54,3 +54,18 @@ vim.filetype.add({
   filename = { ["Dvcfile"] = "yaml", ["dvc.lock"] = "yaml" },
   extension = { dvc = "yaml" },
 })
+
+---- keep split boundaries visible
+-- catppuccin paints both separator groups crust, which is darker than the editor
+-- background, so splits have no visible edge. custom_highlights does not help:
+-- the colorscheme is applied before catppuccin's setup() runs.
+local function brighten_win_separator()
+  local ok, palettes = pcall(require, "catppuccin.palettes")
+  local fg = ok and palettes.get_palette("mocha").overlay0 or "#6c7086"
+  -- WinSeparator links to VertSplit at runtime, so both need setting
+  vim.api.nvim_set_hl(0, "VertSplit", { fg = fg })
+  vim.api.nvim_set_hl(0, "WinSeparator", { fg = fg })
+end
+
+vim.api.nvim_create_autocmd("ColorScheme", { callback = brighten_win_separator })
+brighten_win_separator()
