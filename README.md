@@ -142,22 +142,31 @@ Key shortcuts (`<leader>a`):
 |--------|------|
 | vim-fugitive | Full git workflow |
 | neogit | Interactive git TUI |
-| diffview.nvim | Side-by-side diff viewer |
+| diffview.nvim | Diff viewer, stacked panes by default |
 | blame.nvim | Blame window (`<leader>gB`) and virtual text (`<leader>gV`) |
 | git-conflict.nvim | Conflict resolution helpers |
-| gitsigns.nvim | Gutter signs & hunk operations |
+| gitsigns.nvim | Gutter signs & hunk operations (`]c` / `[c`, `]h` / `[h`) |
 
 Diffview workflow:
 
 | Key / command | Action |
 |---------------|--------|
-| `:DiffviewOpen` | Review working-tree changes |
+| `<leader>gvv` | Review working-tree changes |
+| `<leader>gvb` | Review the branch against its upstream (or origin) base |
+| `<leader>gvf` / `<leader>gvF` | File history for the current file / the whole repo |
+| `<leader>gvq` | Close Diffview |
 | `<leader>b` / `:DiffviewToggleFiles` | Hide or show the file panel |
 | `<leader>e` | Show and focus the file panel |
 | `<Tab>` / `<S-Tab>` | Open the next / previous changed file |
-| `]c` / `[c` | Jump to the next / previous diff |
+| `]c` / `[c` | Jump to the next / previous change; git hunks outside a diff window |
+| `gw` | Toggle wrap in both diff panes at once |
+| `<C-f>` / `<C-b>` | From the file panel, scroll the diff without leaving it |
 | `g<C-x>` | Cycle diff layouts |
-| `:DiffviewClose` | Close Diffview |
+
+`<leader>gvb` resolves its base from `upstream/HEAD` before `origin/HEAD`, so a fork is compared
+against what it forked from rather than against itself. Both it and the other entries open with
+`--imply-local`, which points the HEAD side at the real files, keeping LSP alive so a finding can
+be fixed without leaving the review.
 
 #### Fuzzy Finding & Navigation
 
@@ -174,7 +183,7 @@ Diffview workflow:
 |--------|------|
 | catppuccin (mocha) | Color scheme |
 | lualine.nvim | Status line |
-| ring.nvim | RiNG waiting-session count in the status line |
+| ring.nvim | RiNG waiting-session count in the status line, plus a notification when one starts waiting |
 | bufferline.nvim | Buffer tabs |
 | snacks.nvim | Project-root terminal (`<leader>ft` or `<C-/>`) |
 | noice.nvim | Prettier command-line / notifications |
@@ -333,22 +342,30 @@ TODO -- -g=!**/tests/**
 |--------|------|
 | vim-fugitive | 完整 git 工作流程 |
 | neogit | 互動式 git TUI |
-| diffview.nvim | 並排 diff 檢視器 |
+| diffview.nvim | diff 檢視器，預設上下堆疊 |
 | blame.nvim | Blame 視窗（`<leader>gB`）與虛擬文字（`<leader>gV`） |
 | git-conflict.nvim | 衝突解決輔助 |
-| gitsigns.nvim | 行號欄 git 標記與 hunk 操作 |
+| gitsigns.nvim | 行號欄 git 標記與 hunk 操作（`]c`／`[c`、`]h`／`[h`） |
 
 Diffview 操作：
 
 | 按鍵／命令 | 功能 |
 |------------|------|
-| `:DiffviewOpen` | 審閱工作目錄的變更 |
+| `<leader>gvv` | 審閱工作目錄的變更 |
+| `<leader>gvb` | 以 upstream（或 origin）為基準審閱整條 branch |
+| `<leader>gvf`／`<leader>gvF` | 當前檔案／整個 repo 的檔案歷史 |
+| `<leader>gvq` | 關閉 Diffview |
 | `<leader>b`／`:DiffviewToggleFiles` | 隱藏或顯示檔案面板 |
 | `<leader>e` | 顯示檔案面板並將焦點移入 |
 | `<Tab>`／`<S-Tab>` | 開啟下一個／上一個變更檔案 |
-| `]c`／`[c` | 跳到下一個／上一個 diff |
+| `]c`／`[c` | 跳到下一個／上一個變更；在 diff 視窗外則跳 git hunk |
+| `gw` | 同時切換兩側 diff 的自動換行 |
+| `<C-f>`／`<C-b>` | 游標留在檔案面板，直接捲動右側 diff |
 | `g<C-x>` | 循環切換 diff 版面 |
-| `:DiffviewClose` | 關閉 Diffview |
+
+`<leader>gvb` 依序以 `upstream/HEAD`、`origin/HEAD` 解析比較基準，所以在 fork 底下比的是原始
+專案而不是自己。這些入口都帶 `--imply-local`，讓 HEAD 那一側指向真實檔案，LSP 仍然可用，
+審閱時發現問題可以當場修掉。
 
 #### 模糊搜尋與導覽
 
@@ -365,7 +382,7 @@ Diffview 操作：
 |--------|------|
 | catppuccin（mocha） | 色彩主題 |
 | lualine.nvim | 狀態列 |
-| ring.nvim | 在狀態列顯示等待回應的 RiNG session 數量 |
+| ring.nvim | 在狀態列顯示等待回應的 RiNG session 數量，並在有 session 開始等待時發出通知 |
 | bufferline.nvim | buffer 分頁列 |
 | snacks.nvim | 專案根目錄終端機（`<leader>ft` 或 `<C-/>`） |
 | noice.nvim | 命令列與通知美化 |
