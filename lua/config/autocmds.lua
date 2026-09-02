@@ -69,3 +69,28 @@ end
 
 vim.api.nvim_create_autocmd("ColorScheme", { callback = brighten_win_separator })
 brighten_win_separator()
+
+---- make diffs actually readable
+-- catppuccin's diff groups are ~18% blends of its pastel accents over base,
+-- which desaturates them to grey: DiffChange (#25293c) is near-invisible
+-- against Normal (#1e1e2e), and DiffText (#3e4b6b) barely marks the characters
+-- that actually changed. Hue-true darks at a higher saturation instead. Same
+-- setup() ordering problem as above, so this goes through ColorScheme too.
+--
+-- These four drive Diffview as well: with enhanced_diff_hl it derives
+-- DiffviewDiffAddAsDelete from DiffDelete and links the rest straight through.
+local function strengthen_diff_hl()
+  -- whole lines with no counterpart on the other side
+  vim.api.nvim_set_hl(0, "DiffAdd", { bg = "#1f3d2b" })
+  -- bg only: Diffview copies DiffDelete's fg onto real removed-side code, so a
+  -- fg here would flatten that side's syntax colours
+  vim.api.nvim_set_hl(0, "DiffDelete", { bg = "#46212f" })
+  -- paired lines that differ: kept quiet so DiffText owns the attention
+  vim.api.nvim_set_hl(0, "DiffChange", { bg = "#2b3044" })
+  -- the changed characters themselves; one group serves both sides of the
+  -- split, so a third hue rather than green or red
+  vim.api.nvim_set_hl(0, "DiffText", { bg = "#4c63a0", bold = true })
+end
+
+vim.api.nvim_create_autocmd("ColorScheme", { callback = strengthen_diff_hl })
+strengthen_diff_hl()
