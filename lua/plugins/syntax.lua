@@ -9,14 +9,15 @@ return {
     },
     ft = "python",
     keys = {
-      { ",v", "<cmd>VenvSelect<cr>" },
+      { ",v", "<cmd>VenvSelect<cr>", desc = "Select VirtualEnv" },
     },
     opts = {
-      -- auto_refresh = true,
-      enable_cached_venvs = true,
-      activate_venv_in_terminal = true,
-      notify_user_on_venv_activation = true,
-      picker = "snacks",
+      options = {
+        enable_cached_venvs = true,
+        activate_venv_in_terminal = true,
+        notify_user_on_venv_activation = true,
+        picker = "snacks",
+      },
     },
     lazy = true,
     enabled = true,

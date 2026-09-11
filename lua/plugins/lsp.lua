@@ -4,21 +4,6 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       { "b0o/SchemaStore.nvim", version = false },
-      {
-        "SmiteshP/nvim-navbuddy",
-        dependencies = {
-          "SmiteshP/nvim-navic",
-          "MunifTanjim/nui.nvim",
-          "numToStr/Comment.nvim", -- Optional
-        },
-        event = "VeryLazy",
-        cmd = "Navbuddy",
-        keys = { { "<leader>cn", "<CMD>Navbuddy<CR>", desc = "Navbuddy" } },
-        opts = {
-          lsp = { auto_attach = true },
-          window = { size = "80%" },
-        },
-      },
     },
     opts = {
       servers = {
@@ -104,6 +89,28 @@ return {
         },
         -- jsonls: SchemaStore wiring comes from lazyvim.plugins.extras.lang.json
       },
+    },
+  },
+  {
+    "SmiteshP/nvim-navbuddy",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "MunifTanjim/nui.nvim",
+      "numToStr/Comment.nvim", -- Navbuddy's comment action; native gc/gcc stay unchanged
+    },
+    cmd = "Navbuddy",
+    keys = { { "<leader>cn", "<cmd>Navbuddy<cr>", desc = "Navbuddy" } },
+    opts = {
+      -- setup() also attaches to clients that started before Navbuddy was loaded.
+      lsp = { auto_attach = true },
+      window = { size = "80%" },
+    },
+  },
+  {
+    "danymat/neogen",
+    keys = {
+      { "<leader>cn", false }, -- reserved for Navbuddy
+      { "<leader>cN", "<cmd>Neogen<cr>", desc = "Generate Annotations (Neogen)" },
     },
   },
   -- included in lazyvim (customize behavior)
