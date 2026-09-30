@@ -14,6 +14,27 @@ local function diffview_branch()
   vim.cmd("DiffviewOpen HEAD~1...HEAD --imply-local")
 end
 
+-- Diff exactly what GitHub shows for the checked-out PR: its real base (not a
+-- guessed default branch), at the base's current tip, merge-base style. Stale
+-- remote refs are the usual reason a local diff disagrees with the PR page.
+local function diffview_pr()
+  local function run(cmd) return vim.system(cmd, { text = true }):wait() end
+  local view = run({ "gh", "pr", "view", "--json", "baseRefName,baseRefOid" })
+  if view.code ~= 0 then
+    return vim.notify("Diffview: no PR for this branch (gh pr checkout <n> first)", vim.log.levels.WARN)
+  end
+  local pr = vim.json.decode(view.stdout)
+  if run({ "git", "cat-file", "-e", pr.baseRefOid .. "^{commit}" }).code ~= 0 then
+    -- fork workflow keeps the real base on upstream; plain clones only have origin
+    for _, remote in ipairs({ "upstream", "origin" }) do
+      if run({ "git", "fetch", remote, pr.baseRefName }).code == 0 then
+        break
+      end
+    end
+  end
+  vim.cmd("DiffviewOpen " .. pr.baseRefOid .. "...HEAD --imply-local")
+end
+
 return {
   {
     -- lazyvim default; add lightweight inline current-line blame
@@ -88,6 +109,7 @@ return {
     keys = {
       { "<leader>gvv", "<cmd>DiffviewOpen<cr>", desc = "Diffview (working tree)" },
       { "<leader>gvb", diffview_branch, desc = "Diffview (branch vs upstream/origin)" },
+      { "<leader>gvp", diffview_pr, desc = "Diffview (PR vs its real base)" },
       { "<leader>gvf", "<cmd>DiffviewFileHistory %<cr>", desc = "File History (current file)" },
       { "<leader>gvF", "<cmd>DiffviewFileHistory<cr>", desc = "File History (repo)" },
       { "<leader>gvq", "<cmd>DiffviewClose<cr>", desc = "Diffview Close" },
