@@ -196,6 +196,7 @@ Diffview workflow:
 |---------------|--------|
 | `<leader>gvv` | Review working-tree changes |
 | `<leader>gvb` | Review the branch against its upstream (or origin) base |
+| `<leader>gvp` | Review the checked-out PR against its GitHub base |
 | `<leader>gvf` / `<leader>gvF` | File history for the current file / the whole repo |
 | `<leader>gvq` | Close Diffview |
 | `<leader>b` / `:DiffviewToggleFiles` | Hide or show the file panel |
@@ -211,6 +212,11 @@ If none exists, it warns and falls back to `HEAD~1`. This branch comparison uses
 `--imply-local`, so the HEAD side shows editable working-tree files with LSP support.
 `<leader>gvv` compares the index with the working tree. File history opens historical
 revisions; use `gf` on a diff to open the local file when you want to edit it.
+
+`<leader>gvp` requires an authenticated `gh` CLI. It queries the PR base in the
+background and fetches from `upstream`, then `origin`, if that commit is missing.
+Each command has a 30-second timeout; the diff opens only after the exact base
+commit is available. `gw` returns to its native behavior after closing Diffview.
 
 #### Fuzzy Finding & Navigation
 
@@ -286,8 +292,10 @@ nvim --headless "+lua local ok, err = pcall(dofile, 'scripts/check_config.lua');
 ```
 
 The smoke checks require installed plugins and check effective keymaps, virtualenv
-options, filetype loading, and formatter configuration. They do not run external
-language servers, tests, or Claude sessions end to end.
+options, filetype loading, formatter configuration, Python workspace initialization,
+and Diffview mapping cleanup. PR lookup and fetch responses are simulated; the
+checks do not contact GitHub or run external language servers, project tests, or
+Claude sessions end to end.
 
 ---
 
@@ -473,6 +481,7 @@ Diffview 操作：
 |------------|------|
 | `<leader>gvv` | 審閱工作目錄的變更 |
 | `<leader>gvb` | 以 upstream（或 origin）為基準審閱整條 branch |
+| `<leader>gvp` | 以 GitHub 上的 base 審閱目前 checkout 的 PR |
 | `<leader>gvf`／`<leader>gvF` | 當前檔案／整個 repo 的檔案歷史 |
 | `<leader>gvq` | 關閉 Diffview |
 | `<leader>b`／`:DiffviewToggleFiles` | 隱藏或顯示檔案面板 |
@@ -488,6 +497,10 @@ Diffview 操作：
 HEAD 那一側會顯示可編輯的工作目錄檔案，並保留 LSP。
 `<leader>gvv` 比較 index 與工作目錄；檔案歷史則開啟歷史版本，需要編輯時可在 diff 中
 按 `gf` 開啟本機檔案。
+
+`<leader>gvp` 需要已登入的 `gh` CLI。它會在背景查詢 PR base；若本機缺少該 commit，
+會依序嘗試從 `upstream`、`origin` fetch。每個命令的逾時為 30 秒，確認指定的 base
+commit 存在後才開啟 diff。關閉 Diffview 後，`gw` 會恢復原生行為。
 
 #### 模糊搜尋與導覽
 
@@ -561,5 +574,7 @@ nvim --clean --headless -l scripts/check_lua.lua
 nvim --headless "+lua local ok, err = pcall(dofile, 'scripts/check_config.lua'); if not ok then vim.api.nvim_err_writeln(err); vim.cmd('cquit 1') end" +qa
 ```
 
-冒煙測試需要先安裝外掛，會檢查實際生效的快捷鍵、虛擬環境選項、filetype 載入與
-formatter 配置；不會完整執行外部 LSP、專案測試或 Claude session。
+冒煙測試需要先安裝外掛，會檢查實際生效的快捷鍵、虛擬環境選項、filetype 載入、
+formatter 配置、Python workspace 初始化，以及關閉 Diffview 後的快捷鍵清理。
+PR 查詢與 fetch 回應使用模擬資料；不會連線至 GitHub，也不會完整執行外部 LSP、
+專案測試或 Claude session。

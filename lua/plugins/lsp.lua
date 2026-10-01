@@ -43,6 +43,9 @@ return {
           -- whatever `python` is on $PATH -- it never auto-detects a .venv folder.
           -- Point it at this root's own venv (each uv sub-workspace above has one).
           on_init = function(client)
+            if not client.root_dir then
+              return
+            end
             local venv_python = client.root_dir .. "/.venv/bin/python"
             if vim.uv.fs_stat(venv_python) then
               client.settings =

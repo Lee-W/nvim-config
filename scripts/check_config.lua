@@ -91,5 +91,9 @@ for _, ft in ipairs({ "javascript", "javascriptreact", "typescript", "typescript
   assert_equal(formatters.stop_after_first, true, ft .. " formatter fallback")
 end
 
-vim.fn.delete(tempdir, "rf")
+dofile("scripts/check_regressions.lua")
+for _, client in ipairs(vim.lsp.get_clients()) do
+  client:stop(true)
+end
+-- tempname() fixtures are removed by Neovim on exit, after background jobs stop.
 print("Configuration smoke checks: ok")

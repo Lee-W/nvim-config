@@ -18,21 +18,62 @@ end
 -- guessed default branch), at the base's current tip, merge-base style. Stale
 -- remote refs are the usual reason a local diff disagrees with the PR page.
 local function diffview_pr()
-  local function run(cmd) return vim.system(cmd, { text = true }):wait() end
-  local view = run({ "gh", "pr", "view", "--json", "baseRefName,baseRefOid" })
-  if view.code ~= 0 then
-    return vim.notify("Diffview: no PR for this branch (gh pr checkout <n> first)", vim.log.levels.WARN)
+  local cwd = vim.fn.getcwd()
+  local command_timeout_ms = 30000
+  local function warn(message) vim.notify("Diffview: " .. message, vim.log.levels.WARN) end
+  local function failure(cmd, result)
+    local detail = result.code == 124 and "timed out" or vim.trim(result.stderr or "")
+    return table.concat(cmd, " ") .. ": " .. (detail ~= "" and detail or "exit " .. result.code)
   end
-  local pr = vim.json.decode(view.stdout)
-  if run({ "git", "cat-file", "-e", pr.baseRefOid .. "^{commit}" }).code ~= 0 then
-    -- fork workflow keeps the real base on upstream; plain clones only have origin
-    for _, remote in ipairs({ "upstream", "origin" }) do
-      if run({ "git", "fetch", remote, pr.baseRefName }).code == 0 then
-        break
-      end
+  local function run(cmd, callback)
+    -- Schedule process completion before using Neovim APIs.
+    callback = vim.schedule_wrap(callback)
+    local ok, err = pcall(vim.system, cmd, { text = true, cwd = cwd, timeout = command_timeout_ms }, callback)
+    if not ok then
+      callback({ code = -1, stdout = "", stderr = tostring(err) })
     end
   end
-  vim.cmd("DiffviewOpen " .. pr.baseRefOid .. "...HEAD --imply-local")
+
+  local query = { "gh", "pr", "view", "--json", "baseRefName,baseRefOid" }
+  run(query, function(view)
+    if view.code ~= 0 then
+      return warn(failure(query, view))
+    end
+    local ok, pr = pcall(vim.json.decode, view.stdout)
+    if
+      not ok
+      or type(pr) ~= "table"
+      or type(pr.baseRefName) ~= "string"
+      or pr.baseRefName == ""
+      or type(pr.baseRefOid) ~= "string"
+      or not pr.baseRefOid:match("^%x+$")
+    then
+      return warn("gh pr view returned invalid PR base data")
+    end
+
+    -- A successful fetch may come from an outdated fork. Verify the exact SHA
+    -- after each attempt, and keep trying until that commit is available.
+    local remotes, errors = { "upstream", "origin" }, {}
+    local function open_or_fetch(index)
+      run({ "git", "cat-file", "-e", pr.baseRefOid .. "^{commit}" }, function(result)
+        if result.code == 0 then
+          return require("diffview").open({ "-C=" .. cwd, pr.baseRefOid .. "...HEAD", "--imply-local" })
+        end
+        local remote = remotes[index]
+        if not remote then
+          return warn("PR base commit is unavailable: " .. pr.baseRefOid .. "\n" .. table.concat(errors, "\n"))
+        end
+        local fetch = { "git", "fetch", remote, pr.baseRefName }
+        run(fetch, function(fetched)
+          if fetched.code ~= 0 then
+            errors[#errors + 1] = failure(fetch, fetched)
+          end
+          open_or_fetch(index + 1)
+        end)
+      end)
+    end
+    open_or_fetch(1)
+  end)
 end
 
 return {
@@ -150,8 +191,25 @@ return {
           },
         },
       },
+      keymaps = {
+        view = {
+          {
+            "n",
+            "gw",
+            function()
+              local wrap = not vim.wo.wrap
+              for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+                if vim.wo[win].diff then
+                  vim.wo[win].wrap = wrap
+                end
+              end
+            end,
+            { desc = "Toggle wrap (all diff windows)" },
+          },
+        },
+      },
       hooks = {
-        diff_buf_win_enter = function(bufnr, winid)
+        diff_buf_win_enter = function()
           vim.opt_local.list = false
           vim.opt_local.wrap = true
           vim.opt_local.linebreak = true -- break at word boundaries, not mid-token
@@ -161,17 +219,6 @@ return {
           vim.opt_local.foldcolumn = "0"
           vim.opt_local.statuscolumn = ""
           vim.opt_local.colorcolumn = ""
-
-          -- side-by-side halves the width, so long lines get cut off; toggle wrap
-          -- on both sides at once, since wrapping one side alone breaks alignment
-          vim.keymap.set("n", "gw", function()
-            local wrap = not vim.wo[winid].wrap
-            for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-              if vim.wo[win].diff then
-                vim.wo[win].wrap = wrap
-              end
-            end
-          end, { buffer = bufnr, desc = "Toggle wrap (all diff windows)" })
         end,
       },
     },
