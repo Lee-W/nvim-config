@@ -94,3 +94,24 @@ end
 
 vim.api.nvim_create_autocmd("ColorScheme", { callback = strengthen_diff_hl })
 strengthen_diff_hl()
+
+---- no format-on-save for maigo working files
+-- .maigo/ holds generated boards, plans and review notes. Saving them used to
+-- hang in a synchronous format step (vim.wait), and bufferline's self-
+-- rescheduling redrawtabline kept that wait spinning at 100% CPU.
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+  pattern = "*/.maigo/*",
+  callback = function(ev) vim.b[ev.buf].autoformat = false end,
+})
+
+---- `nvim <dir>` makes that directory the cwd
+-- Otherwise cwd stays where the shell was, so cwd-based pickers (<C-P>) search
+-- the whole repo instead of the directory that was opened -- and for a
+-- globally-gitignored dir like .maigo they never list its files at all.
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    if vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
+      vim.cmd.cd(vim.fn.fnameescape(vim.fn.argv(0)))
+    end
+  end,
+})
