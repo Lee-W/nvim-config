@@ -7,6 +7,8 @@ return {
     },
     opts = {
       servers = {
+        -- marksman indexes every .md under the repo root (.maigo alone has ~480 files) and stalls nvim
+        marksman = { enabled = false },
         ["*"] = {
           capabilities = {
             textDocument = {
