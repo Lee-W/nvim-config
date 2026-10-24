@@ -121,11 +121,15 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   pattern = "*.md",
   callback = function(ev)
     local ok, stat = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(ev.buf))
-    if not (ok and stat and stat.size > 100 * 1024) then return end
+    if not (ok and stat and stat.size > 100 * 1024) then
+      return
+    end
     vim.wo.spell = false
     vim.wo.wrap = false
     vim.wo.cursorline = false
     local rm_ok, rm = pcall(require, "render-markdown")
-    if rm_ok then rm.buf_disable() end
+    if rm_ok then
+      rm.buf_disable()
+    end
   end,
 })
