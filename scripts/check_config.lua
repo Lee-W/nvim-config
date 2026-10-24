@@ -4,6 +4,21 @@ end
 
 local function contains(values, expected) return vim.tbl_contains(values, expected) end
 
+-- Headless Neovim has no notifier plugin, so once LazyVim's lazy_notify queue
+-- expires vim.notify is the built-in one, which echoes ERROR as a Vim error and
+-- aborts the autocmd (e.g. venv-selector's missing-fd notice) that triggered it.
+-- Record notifications instead; never forward them, as the original may be that queue.
+local original_notify = vim.notify
+local notifications = {}
+local level_names = {}
+for name, level in pairs(vim.log.levels) do
+  level_names[level] = name
+end
+vim.notify = function(msg, level)
+  notifications[#notifications + 1] = { msg = tostring(msg), level = level }
+  io.stderr:write(("[check_config] notify(%s): %s\n"):format(level_names[level or vim.log.levels.INFO], tostring(msg)))
+end
+
 -- Headless Neovim does not emit UIEnter, so trigger LazyVim's deferred user
 -- configuration before checking FileType autocmds and lazy-loading behavior.
 vim.api.nvim_exec_autocmds("User", { pattern = "VeryLazy" })
@@ -95,5 +110,6 @@ dofile("scripts/check_regressions.lua")
 for _, client in ipairs(vim.lsp.get_clients()) do
   client:stop(true)
 end
+vim.notify = original_notify
 -- tempname() fixtures are removed by Neovim on exit, after background jobs stop.
 print("Configuration smoke checks: ok")
