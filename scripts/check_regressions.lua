@@ -123,6 +123,7 @@ local cases = {
 }
 
 local system, notify, open = vim.system, vim.notify, diffview.open
+local other_notifications = {}
 local cwd = vim.fn.getcwd()
 local ok, err = xpcall(function()
   for _, case in ipairs(cases) do
@@ -147,7 +148,9 @@ local ok, err = xpcall(function()
       if message:sub(1, 9) == "Diffview:" then
         warnings[#warnings + 1] = message
       else
-        notify(message, ...)
+        -- Never forward to the captured `notify`: it may be LazyVim's lazy_notify
+        -- queue, which re-queues every call during replay, so ipairs() never ends.
+        other_notifications[#other_notifications + 1] = tostring(message)
       end
     end
     diffview.open = function(args) opened[#opened + 1] = args end
@@ -185,6 +188,9 @@ local ok, err = xpcall(function()
 end, debug.traceback)
 vim.system, vim.notify, diffview.open = system, notify, open
 vim.cmd.cd(vim.fn.fnameescape(cwd))
+for _, message in ipairs(other_notifications) do
+  io.stderr:write("[check_regressions] suppressed notify: ", message, "\n")
+end
 assert(ok, err)
 
 -- Use a disposable repository so this works in CI's shallow checkout as well.
