@@ -52,4 +52,25 @@ jobs:
         run: nvim --headless "+Lazy! restore" +qa
 
       - name: Run configuration smoke checks
-        run: nvim --headless "+lua local ok, err = pcall(dofile, 'scripts/check_config.lua'); if not ok then vim.api.nvim_err_writeln(err); vim.cmd('cquit 1') end" +qa
+        timeout-minutes: 3
+        run: timeout -k 10 --signal=INT 90 nvim -V1/tmp/nvim-ci/smoke-verbose.log --headless "+lua local ok, err = pcall(dofile, 'scripts/check_config.lua'); if not ok then vim.api.nvim_err_writeln(err); vim.cmd('cquit 1') end" +qa
+
+      - name: Show stuck-wait traces
+        if: always()
+        run: |
+          for f in "$XDG_STATE_HOME"/nvim/stuck-wait-*.log; do
+            [ -e "$f" ] || continue
+            echo "::group::$f"
+            cat "$f"
+            echo "::endgroup::"
+          done
+
+      - name: Upload smoke diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-diagnostics
+          path: |
+            /tmp/nvim-ci/smoke-verbose.log
+            /tmp/nvim-ci/state/nvim/stuck-wait-*.log
+          if-no-files-found: ignore
