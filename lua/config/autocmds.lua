@@ -95,13 +95,18 @@ end
 vim.api.nvim_create_autocmd("ColorScheme", { callback = strengthen_diff_hl })
 strengthen_diff_hl()
 
----- no format-on-save for maigo working files
+---- no format-on-save, no diagnostics for maigo working files
 -- .maigo/ holds generated boards, plans and review notes. Saving them used to
 -- hang in a synchronous format step (vim.wait), and bufferline's self-
 -- rescheduling redrawtabline kept that wait spinning at 100% CPU.
+-- Their compact layout (list right under a heading) also trips rumdl
+-- MD022/MD032, which is noise for files we only read.
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
   pattern = "*/.maigo/*",
-  callback = function(ev) vim.b[ev.buf].autoformat = false end,
+  callback = function(ev)
+    vim.b[ev.buf].autoformat = false
+    vim.diagnostic.enable(false, { bufnr = ev.buf })
+  end,
 })
 
 ---- `nvim <dir>` makes that directory the cwd
