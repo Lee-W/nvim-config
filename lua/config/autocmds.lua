@@ -138,3 +138,26 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     end
   end,
 })
+
+-- markdown: wrapped continuation lines keep the indent of their list item, so a
+-- long list line does not fall back to column 0 (list:-1 aligns with the text
+-- after the bullet / number)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown" },
+  callback = function()
+    vim.opt_local.breakindent = true
+    vim.opt_local.breakindentopt = "list:-1"
+  end,
+})
+
+-- Pick up files rewritten by external programs while the window stays in the
+-- foreground (LazyVim only runs checktime on FocusGained / TermClose / TermLeave)
+vim.api.nvim_create_autocmd("CursorHold", {
+  group = vim.api.nvim_create_augroup("checktime_on_idle", { clear = true }),
+  callback = function()
+    if vim.bo.buftype ~= "" or vim.fn.getcmdwintype() ~= "" or vim.fn.mode():sub(1, 1) == "c" then
+      return
+    end
+    pcall(vim.cmd, "silent! checktime")
+  end,
+})
