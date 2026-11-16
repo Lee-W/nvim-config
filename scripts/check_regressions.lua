@@ -208,8 +208,38 @@ vim.fn.writefile({ "before" }, repo .. "/sample.txt")
 git({ "add", "sample.txt" })
 git({ "-c", "user.name=Config Test", "-c", "user.email=config-test@example.invalid", "commit", "-m", "Test fixture" })
 vim.fn.writefile({ "after" }, repo .. "/sample.txt")
-diffview.open({ "-C=" .. repo })
+-- Diffview reads `git rev-parse` output through an async job. Under heavy load
+-- (CI compiling parsers while this runs) it occasionally gets an empty result
+-- with exit code 0, reports "Not a repo" and never creates a view. That is
+-- Diffview's race, not our configuration, so only the opening step is retried.
+-- Anything else, including a Lua error from open() or a missing `gw`, still fails.
 local lib = require("diffview.lib")
+local max_open_retries = 3
+local last_notification = "none"
+local retries = 0
+local plain_notify = vim.notify
+vim.notify = function(msg, level, opts)
+  last_notification = tostring(msg)
+  return plain_notify(msg, level, opts)
+end
+for attempt = 0, max_open_retries do
+  diffview.open({ "-C=" .. repo })
+  if vim.wait(2000, function() return lib.get_current_view() ~= nil end, 20) then
+    break
+  end
+  if attempt < max_open_retries then
+    retries = retries + 1
+    io.stderr:write(("[check_regressions] Diffview did not open (retry %d): %s\n"):format(retries, last_notification))
+  end
+end
+vim.notify = plain_notify
+assert(
+  lib.get_current_view() ~= nil,
+  ("Diffview did not open after %d retries (plugin or environment, not the gw mapping); last notification: %s"):format(
+    retries,
+    last_notification
+  )
+)
 assert(
   vim.wait(5000, function()
     local view = lib.get_current_view()
@@ -222,7 +252,7 @@ assert(
       function() return vim.fn.maparg("gw", "n", false, true).desc == "Toggle wrap (all diff windows)" end
     )
   end, 20),
-  "Diffview did not attach its wrap mapping"
+  "Diffview opened but did not attach its wrap mapping"
 )
 
 local view = lib.get_current_view()
